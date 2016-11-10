@@ -1,0 +1,26 @@
+﻿<Window x:Class="RadioEnumProperty.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RadioEnumProperty"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <StackPanel x:Name="MyCarSP">
+        <StackPanel.Resources>
+            <local:EnumToIDConverter x:Key="EnumToIDConverter"/>
+        </StackPanel.Resources>
+        <!--
+        <StackPanel.DataContext>
+            <local:Car x:Name="MyCar"/>
+        </StackPanel.DataContext>
+        -->
+        <Label Content="My Car:"/>
+        <RadioButton GroupName="ColorGroup" Content="None" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.None}}"/>
+        <RadioButton GroupName="ColorGroup" Content="Red" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Red}}"/>
+        <RadioButton GroupName="ColorGroup" Content="Green" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Green}}"/>
+        <RadioButton GroupName="ColorGroup" Content="Blue" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Blue}}"/>
+        <Button x:Name="SetBtn" Content="Set" Click="SetBtn_Click"/>
+        <Button x:Name="ShowBtn" Content="Show" Click="ShowBtn_Click"/>
+    </StackPanel>
+</Window>
