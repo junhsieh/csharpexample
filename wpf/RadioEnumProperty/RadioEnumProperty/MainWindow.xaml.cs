@@ -25,12 +25,12 @@ namespace RadioEnumProperty
         private void SetBtn_Click(object sender, RoutedEventArgs e)
         {
             this.MyCar.Color = Colors.Green;
-            Debug.WriteLine(this.MyCar.Color);
+            Debug.WriteLine("Color: " + (int)this.MyCar.Color + "_" + this.MyCar.Color);
         }
 
         private void ShowBtn_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine(this.MyCar.Color);
+            Debug.WriteLine("Color: " + (int)this.MyCar.Color + "_" + this.MyCar.Color);
         }
     }
 
