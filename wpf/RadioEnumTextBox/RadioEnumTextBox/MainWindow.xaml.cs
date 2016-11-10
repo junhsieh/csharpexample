@@ -20,12 +20,11 @@ namespace RadioEnumTextBox
             //ColorBox.Text = ((int)Colors.Green).ToString();
             ColorBox.Text = (2).ToString();
 
-            Debug.WriteLine("ColorBox: " + ColorBox.Text);
+            Debug.WriteLine("ColorBox: " + ColorBox.Text + "_" + Enum.Parse(typeof(Colors), ColorBox.Text));
         }
-
         private void ShowBtn_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("ColorBox: " + ColorBox.Text);
+            Debug.WriteLine("ColorBox: " + ColorBox.Text + "_" + Enum.Parse(typeof(Colors), ColorBox.Text));
         }
     }
 
