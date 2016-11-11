@@ -1,0 +1,29 @@
+﻿<Window x:Class="CheckBoxTextBox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CheckBoxTextBox"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <local:CustomMultiValueConvertor x:Key="MyCustomConvertor"></local:CustomMultiValueConvertor>
+    </Window.Resources>
+
+    <StackPanel>
+        <CheckBox x:Name="B1" Content="A"/>
+        <CheckBox x:Name="B2" Content="B"/>
+        <CheckBox x:Name="B3" Content="C"/>
+        <TextBox x:Name="txtCompleteName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="267">
+            <TextBox.Text>
+                <MultiBinding Converter="{StaticResource MyCustomConvertor}" UpdateSourceTrigger="PropertyChanged">
+                    <Binding ElementName="B1" Path="IsChecked"/>
+                    <Binding ElementName="B2" Path="IsChecked"/>
+                    <Binding ElementName="B3" Path="IsChecked"/>
+                </MultiBinding>
+            </TextBox.Text>
+        </TextBox>
+        <Button x:Name="SetBtn" Content="Set false true false" Click="SetBtn_Click_1"/>
+        <Button x:Name="Set2Btn" Content="Set2 true true false" Click="Set2Btn_Click_1"/>
+    </StackPanel>
+</Window>
