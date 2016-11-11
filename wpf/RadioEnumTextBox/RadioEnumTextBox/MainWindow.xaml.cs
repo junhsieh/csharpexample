@@ -17,18 +17,18 @@ namespace RadioEnumTextBox
 
         private void SetBtn_Click(object sender, RoutedEventArgs e)
         {
-            //ColorBox.Text = ((int)Colors.Green).ToString();
+            //ColorBox.Text = ((int)ColorEnum.Green).ToString();
             ColorBox.Text = (2).ToString();
 
-            Debug.WriteLine("ColorBox: " + ColorBox.Text + "_" + Enum.Parse(typeof(Colors), ColorBox.Text));
+            Debug.WriteLine("ColorBox: " + ColorBox.Text + "_" + Enum.Parse(typeof(ColorEnum), ColorBox.Text));
         }
         private void ShowBtn_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("ColorBox: " + ColorBox.Text + "_" + Enum.Parse(typeof(Colors), ColorBox.Text));
+            Debug.WriteLine("ColorBox: " + ColorBox.Text + "_" + Enum.Parse(typeof(ColorEnum), ColorBox.Text));
         }
     }
 
-    public enum Colors
+    public enum ColorEnum
     {
         None = 0,
         Red = 1,
@@ -45,7 +45,7 @@ namespace RadioEnumTextBox
             //Debug.WriteLine("Type 3: " + Type.GetTypeCode(targetType));
             //Debug.WriteLine("Type 4: " + TypeDescriptor.GetConverter(targetType));
 
-            //string checkValue = ((int)Enum.Parse(typeof(Colors), (string)parameter)).ToString();
+            //string checkValue = ((int)Enum.Parse(typeof(ColorEnum), (string)parameter)).ToString();
             //return value.Equals(checkValue);
 
             return value.Equals(((int)parameter).ToString());
@@ -53,7 +53,7 @@ namespace RadioEnumTextBox
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            //return value.Equals(true) ? (int)Enum.Parse(typeof(Colors), parameter.ToString()) : Binding.DoNothing;
+            //return value.Equals(true) ? (int)Enum.Parse(typeof(ColorEnum), parameter.ToString()) : Binding.DoNothing;
             return value.Equals(true) ? (int)parameter : Binding.DoNothing;
         }
     }
