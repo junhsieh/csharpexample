@@ -70,6 +70,10 @@ namespace CheckBoxProperty
             {
                 IEnumerable<int> IDArr = IDs.Split(',').Select(x => int.Parse(x));
 
+                //this.Language
+                //    .Where(d => IDArr.Contains(d.ID))
+                //    .ToList().ForEach(d => d.IsSelected = true);
+
                 foreach (var item in this.Language)
                 {
                     if (IDArr.Contains<int>(item.ID))
@@ -87,11 +91,13 @@ namespace CheckBoxProperty
 
         public void showLanguage()
         {
-            foreach (var item in this.Language)
-            {
+            IEnumerable<string> selectedData = this.Language.Where(d => d.IsSelected).Select(d => d.Text);
 
-                Debug.WriteLine("Language: " + item.Text + "_" + item.IsSelected);
+            foreach (var item in selectedData)
+            {
+                Debug.WriteLine("Language HERE: " + item);
             }
+
             Debug.WriteLine("");
         }
 
