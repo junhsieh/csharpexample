@@ -11,10 +11,10 @@
             <local:EnumToIDConverter x:Key="EnumToIDConverter"/>
         </StackPanel.Resources>
         <TextBox x:Name="ColorBox"/>
-        <RadioButton GroupName="ColorGroup" Content="None" IsChecked="{Binding ElementName=ColorBox, Path=Text, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.None}}"/>
-        <RadioButton GroupName="ColorGroup" Content="Red" IsChecked="{Binding ElementName=ColorBox, Path=Text, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Red}}"/>
-        <RadioButton GroupName="ColorGroup" Content="Green" IsChecked="{Binding ElementName=ColorBox, Path=Text, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Green}}"/>
-        <RadioButton GroupName="ColorGroup" Content="Blue" IsChecked="{Binding ElementName=ColorBox, Path=Text, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Blue}}"/>
+        <RadioButton GroupName="ColorGroup" Content="{x:Static local:Colors.None}" IsChecked="{Binding ElementName=ColorBox, Path=Text, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.None}}"/>
+        <RadioButton GroupName="ColorGroup" Content="{x:Static local:Colors.Red}" IsChecked="{Binding ElementName=ColorBox, Path=Text, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Red}}"/>
+        <RadioButton GroupName="ColorGroup" Content="{x:Static local:Colors.Green}" IsChecked="{Binding ElementName=ColorBox, Path=Text, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Green}}"/>
+        <RadioButton GroupName="ColorGroup" Content="{x:Static local:Colors.Blue}" IsChecked="{Binding ElementName=ColorBox, Path=Text, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Blue}}"/>
         <Button x:Name="SetBtn" Content="Set" Click="SetBtn_Click"/>
         <Button x:Name="ShowBtn" Content="Show" Click="ShowBtn_Click"/>
     </StackPanel>
