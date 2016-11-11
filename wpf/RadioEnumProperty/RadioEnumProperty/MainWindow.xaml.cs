@@ -18,13 +18,13 @@ namespace RadioEnumProperty
             InitializeComponent();
 
             this.MyCar = new Car();
-            this.MyCar.Color = Colors.Red;
+            this.MyCar.Color = ColorEnum.Red;
             this.MyCarSP.DataContext = MyCar;
         }
 
         private void SetBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.MyCar.Color = Colors.Green;
+            this.MyCar.Color = ColorEnum.Green;
             Debug.WriteLine("Color: " + (int)this.MyCar.Color + "_" + this.MyCar.Color);
         }
 
@@ -44,8 +44,8 @@ namespace RadioEnumProperty
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-        private Colors color { get; set; }
-        public Colors Color
+        private ColorEnum color { get; set; }
+        public ColorEnum Color
         {
             get { return this.color; }
             set
@@ -59,7 +59,7 @@ namespace RadioEnumProperty
         }
     }
 
-    public enum Colors
+    public enum ColorEnum
     {
         None = 0,
         Red = 1,
@@ -76,7 +76,7 @@ namespace RadioEnumProperty
             //Debug.WriteLine("Type 3: " + Type.GetTypeCode(targetType));
             //Debug.WriteLine("Type 4: " + TypeDescriptor.GetConverter(targetType));
 
-            //string checkValue = ((int)Enum.Parse(typeof(Colors), (string)parameter)).ToString();
+            //string checkValue = ((int)Enum.Parse(typeof(ColorEnum), (string)parameter)).ToString();
             //return value.Equals(checkValue);
 
             return value.Equals(parameter);
@@ -84,7 +84,7 @@ namespace RadioEnumProperty
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            //return value.Equals(true) ? (int)Enum.Parse(typeof(Colors), parameter.ToString()) : Binding.DoNothing;
+            //return value.Equals(true) ? (int)Enum.Parse(typeof(ColorEnum), parameter.ToString()) : Binding.DoNothing;
             return value.Equals(true) ? parameter : Binding.DoNothing;
         }
     }

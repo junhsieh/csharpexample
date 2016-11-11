@@ -16,10 +16,10 @@
         </StackPanel.DataContext>
         -->
         <Label Content="My Car:"/>
-        <RadioButton GroupName="ColorGroup" Content="{x:Static local:Colors.None}" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.None}}"/>
-        <RadioButton GroupName="ColorGroup" Content="{x:Static local:Colors.Red}" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Red}}"/>
-        <RadioButton GroupName="ColorGroup" Content="{x:Static local:Colors.Green}" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Green}}"/>
-        <RadioButton GroupName="ColorGroup" Content="{x:Static local:Colors.Blue}" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:Colors.Blue}}"/>
+        <RadioButton GroupName="ColorGroup" Content="{x:Static local:ColorEnum.None}" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:ColorEnum.None}}"/>
+        <RadioButton GroupName="ColorGroup" Content="{x:Static local:ColorEnum.Red}" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:ColorEnum.Red}}"/>
+        <RadioButton GroupName="ColorGroup" Content="{x:Static local:ColorEnum.Green}" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:ColorEnum.Green}}"/>
+        <RadioButton GroupName="ColorGroup" Content="{x:Static local:ColorEnum.Blue}" IsChecked="{Binding Path=Color, Converter={StaticResource EnumToIDConverter}, ConverterParameter={x:Static local:ColorEnum.Blue}}"/>
         <Button x:Name="SetBtn" Content="Set" Click="SetBtn_Click"/>
         <Button x:Name="ShowBtn" Content="Show" Click="ShowBtn_Click"/>
     </StackPanel>
