@@ -41,6 +41,10 @@ namespace RadioMVVM.ViewModel
 
         public static void SetID(ObservableCollection<SingleOpt> optArr, Int64 value)
         {
+            // NOTE: for ComboBox, the IsSelected of all options needs to be reset.
+            // However, for Radio and CheckBox, there is no need to reset.
+            optArr.ToList().ForEach(d => d.IsSelected = false);
+
             optArr.Where(d => d.ID == value).ToList().ForEach(d => d.IsSelected = true);
         }
 
