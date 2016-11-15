@@ -33,7 +33,6 @@ namespace RadioMVVM.ViewModel
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-
     }
 
     public static class SingleOptX
