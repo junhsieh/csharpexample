@@ -33,7 +33,10 @@ namespace ComboBoxMVVM
         public Int64 Province
         {
             get { return ViewModel.SingleOptX.GetID(this.ProvinceOptArr); }
-            set { ViewModel.SingleOptX.SetID(this.ProvinceOptArr, value); NotifyPropertyChanged("Province");}
+            set {
+                ViewModel.SingleOptX.SetID(this.ProvinceOptArr, value);
+                NotifyPropertyChanged("Province"); // NOTE: for ComboBox, it needs to be "notified" manually.
+            }
         }
         public ObservableCollection<ViewModel.SingleOpt> ProvinceOptArr { get; set; }
 
