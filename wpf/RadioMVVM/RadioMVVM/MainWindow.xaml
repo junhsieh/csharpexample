@@ -1,0 +1,35 @@
+﻿<Window x:Class="RadioMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RadioMVVM"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <StackPanel>
+        <StackPanel.DataContext>
+            <local:MainWindowViewModel x:Name="MainWindowViewModel"/>
+        </StackPanel.DataContext>
+        <StackPanel>
+            <ItemsControl ItemsSource="{Binding Path=SalOrder.CountryOptArr}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton GroupName="CountryOptGroup" Content="{Binding Path=Text}" IsChecked="{Binding IsSelected}" Margin="0,6,10,0"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <StackPanel>
+            <Label x:Name="ShowCountryLb" Content="Selected country:"/>
+            <Button x:Name="ShowCountryBtn" Content="Show Country" Click="ShowCountryBtn_Click"/>
+            <Label Content="Input 0 to 3:"/>
+            <TextBox x:Name="IDCountryBox"/>
+            <Button x:Name="SetCountryBtn" Content="Set Country" Click="SetCountryBtn_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
