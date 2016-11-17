@@ -6,7 +6,11 @@ or
 
 PM&gt; Install-Package DotNetProjects.Wpf.Toolkit
 
-Note: if you are using "DotNetProjects.Wpf.Toolkit" instead of "WPFToolkit", the xml namespace should be:
+the xml namespace for WPFToolkit:
 
         xmlns:toolkit1="clr-namespace:System.Windows.Controls;assembly=WPFToolkit"
+
+the xml namespace for DotNetProjects.Wpf.Toolkit:
+
         xmlns:toolkit2="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
+
