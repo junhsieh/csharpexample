@@ -42,11 +42,29 @@ namespace RDLCReport
             this.PrintDoc.RefreshReport();
         }
 
+        private LocalReport GetLocalReport()
+        {
+            LocalReport report = new LocalReport();
+            report.ReportPath = "Report1.rdlc";
+            report.DataSources.Add(new ReportDataSource("DataSet1", this.GetData()));
+
+            // basic data
+            List<ReportParameter> MyParam1 = new List<ReportParameter>();
+            MyParam1.Add(new ReportParameter("MyParam1", "Computer"));
+            MyParam1.Add(new ReportParameter("MyParam1", "Monitor"));
+            ReportParameter MyParam2 = new ReportParameter("MyParam2", "Keyboard");
+
+            report.SetParameters(MyParam1);
+            report.SetParameters(MyParam2);
+            return report;
+        }
+
         private void PrintReportSilentlyBtn_Click(object sender, RoutedEventArgs e)
         {
             using (PrintDemo demo = new PrintDemo())
             {
-                demo.Run("Report1.rdlc", "DataSet1", this.GetData(), demo.GetDefaultPrinterNameV1());
+                LocalReport report = this.GetLocalReport();
+                demo.Run(report, demo.GetDefaultPrinterNameV1());
             }
         }
 
@@ -54,7 +72,8 @@ namespace RDLCReport
         {
             using (PrintDemo demo = new PrintDemo())
             {
-                demo.Run("Report1.rdlc", "DataSet1", this.GetData(), "Microsoft Print to PDF");
+                LocalReport report = this.GetLocalReport();
+                demo.Run(report, "Microsoft Print to PDF");
             }
         }
 

@@ -134,21 +134,8 @@ namespace RDLCReport
 
         // Create a local report for Report.rdlc, load the data,
         //    export the report to an .emf file, and print it.
-        public void Run(string RDLCFile, string DataSetName, DataTable data, string PrinterName)
+        public void Run(LocalReport report, string PrinterName)
         {
-            LocalReport report = new LocalReport();
-            report.ReportPath = RDLCFile;
-            report.DataSources.Add(new ReportDataSource(DataSetName, data));
-
-            // basic data
-            List<ReportParameter> MyParam1 = new List<ReportParameter>();
-            MyParam1.Add(new ReportParameter("MyParam1", "Computer"));
-            MyParam1.Add(new ReportParameter("MyParam1", "Monitor"));
-            ReportParameter MyParam2 = new ReportParameter("MyParam2", "Keyboard");
-
-            report.SetParameters(MyParam1);
-            report.SetParameters(MyParam2);
-
             Export(report);
 
             this.PrinterName = PrinterName;
