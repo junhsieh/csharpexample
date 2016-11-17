@@ -139,6 +139,16 @@ namespace RDLCReport
             LocalReport report = new LocalReport();
             report.ReportPath = RDLCFile;
             report.DataSources.Add(new ReportDataSource(DataSetName, data));
+
+            // basic data
+            List<ReportParameter> MyParam1 = new List<ReportParameter>();
+            MyParam1.Add(new ReportParameter("MyParam1", "Computer"));
+            MyParam1.Add(new ReportParameter("MyParam1", "Monitor"));
+            ReportParameter MyParam2 = new ReportParameter("MyParam2", "Keyboard");
+
+            report.SetParameters(MyParam1);
+            report.SetParameters(MyParam2);
+
             Export(report);
 
             this.PrinterName = PrinterName;

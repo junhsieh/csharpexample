@@ -1,7 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System.Collections.Generic;
 using System.Data;
-using System.Threading;
 using System.Windows;
 
 namespace RDLCReport
@@ -37,8 +36,8 @@ namespace RDLCReport
 
             this.PrintDoc.LocalReport.DataSources.Add(reportDataSource);
 
-            //this.PrintDoc.LocalReport.SetParameters(MyParam1);
-            //this.PrintDoc.LocalReport.SetParameters(MyParam2);
+            this.PrintDoc.LocalReport.SetParameters(MyParam1);
+            this.PrintDoc.LocalReport.SetParameters(MyParam2);
 
             this.PrintDoc.RefreshReport();
         }
