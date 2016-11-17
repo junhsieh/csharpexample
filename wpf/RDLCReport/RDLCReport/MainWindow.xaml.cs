@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WinForms;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading;
 using System.Windows;
@@ -17,14 +18,30 @@ namespace RDLCReport
 
         private void ShowReportBtn_Click(object sender, RoutedEventArgs e)
         {
+            // basic data
+            //ReportParameter[] MyParam1 = new ReportParameter[2];
+            //MyParam1[0] = new ReportParameter("MyParam1", "Computer");
+            //MyParam1[1] = new ReportParameter("MyParam1", "Monitor");
+            List<ReportParameter> MyParam1 = new List<ReportParameter>();
+            MyParam1.Add(new ReportParameter("MyParam1", "Computer"));
+            MyParam1.Add(new ReportParameter("MyParam1", "Monitor"));
+
+            ReportParameter MyParam2 = new ReportParameter("MyParam2", "Keyboard");
+
+            // table data
             ReportDataSource reportDataSource = new ReportDataSource();
             reportDataSource.Name = "DataSet1"; // Name of the DataSet we set in .rdlc
             reportDataSource.Value = this.GetData();
 
+            //
             this.PrintDoc.Reset();
 
             this.PrintDoc.LocalReport.ReportEmbeddedResource = "RDLCReport.Report1.rdlc";
+
             this.PrintDoc.LocalReport.DataSources.Add(reportDataSource);
+
+            this.PrintDoc.LocalReport.SetParameters(MyParam1);
+            this.PrintDoc.LocalReport.SetParameters(MyParam2);
 
             this.PrintDoc.RefreshReport();
         }
