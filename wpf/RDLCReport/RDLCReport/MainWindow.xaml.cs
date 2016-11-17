@@ -28,6 +28,14 @@ namespace RDLCReport
             this.PrintDoc.RefreshReport();
         }
 
+        private void PrintReportSilentlyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            using (PrintDemo demo = new PrintDemo())
+            {
+                demo.Run("Report1.rdlc", "DataSet1", this.GetData());
+            }
+        }
+
         private DataTable GetData()
         {
             DataTable dt = new DataTable();
@@ -59,6 +67,14 @@ namespace RDLCReport
             return dt;
         }
 
+        private DataTable GetDataFromXML()
+        {
+            // Create a new DataSet and read sales data file
+            //    data.xml into the first DataTable.
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml(@"..\..\data.xml");
+            return dataSet.Tables[0];
+        }
     }
 
     class Person

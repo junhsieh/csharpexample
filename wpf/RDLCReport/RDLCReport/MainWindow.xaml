@@ -9,6 +9,7 @@
         Title="MainWindow" Height="422.741" Width="795.934">
     <StackPanel>
         <Button x:Name="ShowReportBtn" Content="Show Report" Click="ShowReportBtn_Click"/>
+        <Button x:Name="PrintReportSilentlyBtn" Content="Print Report Silently" Click="PrintReportSilentlyBtn_Click"/>
         <WindowsFormsHost HorizontalAlignment="Left" Height="257" Margin="10,48,0,0" VerticalAlignment="Top" Width="725">
             <rv:ReportViewer x:Name="PrintDoc"/>
         </WindowsFormsHost>
