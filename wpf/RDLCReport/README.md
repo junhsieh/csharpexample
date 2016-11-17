@@ -1,1 +1,3 @@
 Microsoft.ReportViewer.WinForms
+
+System.Management

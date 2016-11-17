@@ -1,13 +1,15 @@
-﻿using System;
-using System.IO;
+﻿using Microsoft.Reporting.WinForms;
+using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Text;
+using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using Microsoft.Reporting.WinForms;
-using System.Drawing;
+using System.IO;
+using System.Management;
+using System.Text;
+using System.Threading;
 
 namespace RDLCReport
 {
@@ -15,6 +17,9 @@ namespace RDLCReport
     {
         private int m_currentPageIndex;
         private IList<Stream> m_streams;
+
+        private string PDFPath = "";
+        private string PrinterName = "";
 
         // Routine to provide to the report renderer, in order to
         //    save an image for each page of the report.
@@ -79,10 +84,21 @@ namespace RDLCReport
             }
 
             PrintDocument printDoc = new PrintDocument();
+            printDoc.PrinterSettings.PrinterName = this.PrinterName;
+
+            if (this.PrinterName == "Microsoft Print to PDF")
+            {
+                var directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                var file = (string)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds.ToString();
+                this.PDFPath = Path.Combine(directory, file + ".pdf");
+
+                printDoc.PrinterSettings.PrintToFile = true;
+                printDoc.PrinterSettings.PrintFileName = this.PDFPath;
+            }
 
             if (!printDoc.PrinterSettings.IsValid)
             {
-                throw new Exception("Error: cannot find the default printer.");
+                throw new Exception("Error: cannot find the printer.");
             }
             else
             {
@@ -92,15 +108,52 @@ namespace RDLCReport
             }
         }
 
+        public string GetDefaultPrinterNameV1()
+        {
+            PrinterSettings settings = new PrinterSettings();
+            return settings.PrinterName;
+        }
+
+        // this one seems more reliable.
+        public string GetDefaultPrinterNameV2()
+        {
+            var query = new ObjectQuery("SELECT * FROM Win32_Printer");
+            var searcher = new ManagementObjectSearcher(query);
+
+            foreach (ManagementObject mo in searcher.Get())
+            {
+                if (((bool?)mo["Default"]) ?? false)
+                {
+                    return mo["Name"] as string;
+                }
+            }
+
+            return null;
+        }
+
         // Create a local report for Report.rdlc, load the data,
         //    export the report to an .emf file, and print it.
-        public void Run(string RDLCFile, string dataSetName, DataTable data)
+        public void Run(string RDLCFile, string DataSetName, DataTable data, string PrinterName)
         {
             LocalReport report = new LocalReport();
             report.ReportPath = RDLCFile;
-            report.DataSources.Add(new ReportDataSource(dataSetName, data));
+            report.DataSources.Add(new ReportDataSource(DataSetName, data));
             Export(report);
-            Print();
+
+            this.PrinterName = PrinterName;
+            this.Print();
+            this.OpenPDF();
+        }
+
+        private void OpenPDF()
+        {
+            Debug.WriteLine(this.PDFPath);
+
+            if (this.PrinterName == "Microsoft Print to PDF")
+            {
+                Thread.Sleep(1500);
+                System.Diagnostics.Process.Start(this.PDFPath);
+            }
         }
 
         public void Dispose()

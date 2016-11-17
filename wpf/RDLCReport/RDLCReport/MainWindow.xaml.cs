@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System.Data;
+using System.Threading;
 using System.Windows;
 
 namespace RDLCReport
@@ -32,7 +33,15 @@ namespace RDLCReport
         {
             using (PrintDemo demo = new PrintDemo())
             {
-                demo.Run("Report1.rdlc", "DataSet1", this.GetData());
+                demo.Run("Report1.rdlc", "DataSet1", this.GetData(), demo.GetDefaultPrinterNameV1());
+            }
+        }
+
+        private void PrintReportPDFBtn_Click(object sender, RoutedEventArgs e)
+        {
+            using (PrintDemo demo = new PrintDemo())
+            {
+                demo.Run("Report1.rdlc", "DataSet1", this.GetData(), "Microsoft Print to PDF");
             }
         }
 
