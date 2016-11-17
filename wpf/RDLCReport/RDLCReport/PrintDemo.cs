@@ -142,18 +142,19 @@ namespace RDLCReport
 
             this.PrinterName = PrinterName;
             this.Print();
-            this.OpenPDF();
+
+            if (this.PrinterName == "Microsoft Print to PDF")
+            {
+                this.OpenPDF();
+            }
         }
 
         private void OpenPDF()
         {
             Debug.WriteLine(this.PDFPath);
 
-            if (this.PrinterName == "Microsoft Print to PDF")
-            {
-                Thread.Sleep(1500);
-                System.Diagnostics.Process.Start(this.PDFPath);
-            }
+            Thread.Sleep(1500);
+            System.Diagnostics.Process.Start(this.PDFPath);
         }
 
         public void Dispose()
