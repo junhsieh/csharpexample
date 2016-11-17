@@ -43,6 +43,7 @@ namespace RDLCReport
                 <MarginRight>0.25in</MarginRight>
                 <MarginBottom>0.25in</MarginBottom>
             </DeviceInfo>";
+
             Warning[] warnings;
             m_streams = new List<Stream>();
             report.Render("Image", deviceInfo, CreateStream, out warnings);

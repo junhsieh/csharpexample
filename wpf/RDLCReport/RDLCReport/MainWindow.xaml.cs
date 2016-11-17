@@ -19,9 +19,6 @@ namespace RDLCReport
         private void ShowReportBtn_Click(object sender, RoutedEventArgs e)
         {
             // basic data
-            //ReportParameter[] MyParam1 = new ReportParameter[2];
-            //MyParam1[0] = new ReportParameter("MyParam1", "Computer");
-            //MyParam1[1] = new ReportParameter("MyParam1", "Monitor");
             List<ReportParameter> MyParam1 = new List<ReportParameter>();
             MyParam1.Add(new ReportParameter("MyParam1", "Computer"));
             MyParam1.Add(new ReportParameter("MyParam1", "Monitor"));
@@ -40,8 +37,8 @@ namespace RDLCReport
 
             this.PrintDoc.LocalReport.DataSources.Add(reportDataSource);
 
-            this.PrintDoc.LocalReport.SetParameters(MyParam1);
-            this.PrintDoc.LocalReport.SetParameters(MyParam2);
+            //this.PrintDoc.LocalReport.SetParameters(MyParam1);
+            //this.PrintDoc.LocalReport.SetParameters(MyParam2);
 
             this.PrintDoc.RefreshReport();
         }
