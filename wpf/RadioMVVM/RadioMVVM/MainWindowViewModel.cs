@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace RadioMVVM
 {
-    public class MainWindowViewModel
+    class MainWindowViewModel
     {
         public SalOrder SalOrder { get; set; }
 
@@ -14,7 +14,7 @@ namespace RadioMVVM
         }
     }
 
-    public class SalOrder : INotifyPropertyChanged
+    class SalOrder : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

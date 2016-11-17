@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace CheckBoxMVVM
 {
-    public class MainWindowViewModel
+    class MainWindowViewModel
     {
         public SalOrder SalOrder { get; set; }
 
@@ -15,7 +15,7 @@ namespace CheckBoxMVVM
         }
     }
 
-    public class SalOrder : INotifyPropertyChanged
+    class SalOrder : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

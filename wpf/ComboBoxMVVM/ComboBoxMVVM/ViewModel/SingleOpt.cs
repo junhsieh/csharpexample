@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ComboBoxMVVM.ViewModel
 {
-    public class SingleOpt : INotifyPropertyChanged
+    class SingleOpt : INotifyPropertyChanged
     {
         public Int64 ID { get; set; }
         public string Text { get; set; }
@@ -32,7 +32,7 @@ namespace ComboBoxMVVM.ViewModel
         }
     }
 
-    public static class SingleOptX
+    static class SingleOptX
     {
         public static Int64 GetID(ObservableCollection<SingleOpt> optArr)
         {
@@ -41,10 +41,7 @@ namespace ComboBoxMVVM.ViewModel
 
         public static void SetID(ObservableCollection<SingleOpt> optArr, Int64 value)
         {
-            // NOTE: for ComboBox, the IsSelected of all options needs to be reset.
-            // However, for Radio and CheckBox, there is no need to reset.
             optArr.ToList().ForEach(d => d.IsSelected = false);
-
             optArr.Where(d => d.ID == value).ToList().ForEach(d => d.IsSelected = true);
         }
 
@@ -58,6 +55,16 @@ namespace ComboBoxMVVM.ViewModel
             }
 
             return str;
+        }
+
+        public static void RemoveOptArr(ObservableCollection<SingleOpt> optArr)
+        {
+            ObservableCollection<SingleOpt> tmpArr = new ObservableCollection<SingleOpt>(optArr.Where(d => d.IsSelected == false));
+
+            foreach (var item in tmpArr)
+            {
+                optArr.Remove(item);
+            }
         }
     }
 }

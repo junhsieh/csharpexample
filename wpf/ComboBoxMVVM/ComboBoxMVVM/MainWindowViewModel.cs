@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ComboBoxMVVM
 {
-    public class MainWindowViewModel
+    class MainWindowViewModel
     {
         public SalOrder SalOrder { get; set; }
 
@@ -18,7 +18,7 @@ namespace ComboBoxMVVM
         }
     }
 
-    public class SalOrder : INotifyPropertyChanged
+    class SalOrder : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

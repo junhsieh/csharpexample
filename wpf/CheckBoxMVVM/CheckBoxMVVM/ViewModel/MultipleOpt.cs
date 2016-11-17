@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CheckBoxMVVM.ViewModel
 {
-    public class MultipleOpt : INotifyPropertyChanged
+    class MultipleOpt : INotifyPropertyChanged
     {
         public Int64 ID { get; set; }
         public string Text { get; set; }
@@ -22,7 +22,7 @@ namespace CheckBoxMVVM.ViewModel
         }
     }
 
-    public static class MultipleOptX
+    static class MultipleOptX
     {
         public static List<Int64> GetID(ObservableCollection<MultipleOpt> optArr)
         {
@@ -34,6 +34,7 @@ namespace CheckBoxMVVM.ViewModel
         {
             if (value != null)
             {
+                optArr.ToList().ForEach(d => d.IsSelected = false);
                 optArr.Where(d => value.Contains(d.ID)).ToList().ForEach(d => d.IsSelected = true);
             }
         }
@@ -48,6 +49,16 @@ namespace CheckBoxMVVM.ViewModel
             }
 
             return strArr;
+        }
+
+        public static void RemoveOptArr(ObservableCollection<MultipleOpt> optArr)
+        {
+            ObservableCollection<MultipleOpt> tmpArr = new ObservableCollection<MultipleOpt>(optArr.Where(d => d.IsSelected == false));
+
+            foreach (var item in tmpArr)
+            {
+                optArr.Remove(item);
+            }
         }
     }
 }
