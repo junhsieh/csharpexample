@@ -1,0 +1,33 @@
+﻿<Window x:Class="AutoCompleteWPFToolKit.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoCompleteWPFToolKit"
+        mc:Ignorable="d"
+        xmlns:toolkit1="http://schemas.microsoft.com/wpf/2008/toolkit"
+        xmlns:toolkit2="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        Title="MainWindow" Height="350" Width="525">
+    <StackPanel>
+        <toolkit1:DatePicker Width="100" Height="32"/>
+        <Label Content="Press d:"/>
+        <toolkit2:AutoCompleteBox x:Name="MyAC"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left"
+                                  Width="150"
+                                  ItemsSource="{Binding Collection}"
+                                  Height="23"
+                                  ValueMemberPath="DealerName"
+                                  SelectionChanged="MyAC_SelectionChanged">
+            <toolkit2:AutoCompleteBox.ItemTemplate>
+                <DataTemplate >
+                    <StackPanel Orientation="Horizontal" Width="300">
+                        <Label Content="{Binding IDDealer}" Width="100" Background="Black" Foreground="White"/>
+                        <Label Content="{Binding DealerName}" FontStyle="Italic" Foreground="DarkGray" />
+                    </StackPanel>
+                </DataTemplate>
+            </toolkit2:AutoCompleteBox.ItemTemplate>
+        </toolkit2:AutoCompleteBox>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Result" VerticalAlignment="Top"/>
+    </StackPanel>
+</Window>
