@@ -1,3 +1,4 @@
-Microsoft.ReportViewer.WinForms
+# Add these reference:
 
-System.Management
+Microsoft.ReportViewer.WinForms  
+System.Management  
