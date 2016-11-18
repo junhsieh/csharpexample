@@ -326,11 +326,27 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Image Name="Image7">
+        <Source>Database</Source>
+        <Value>=First(Fields!bin.Value, "DataSet2")</Value>
+        <MIMEType>image/png</MIMEType>
+        <Sizing>FitProportional</Sizing>
+        <Top>0.37375in</Top>
+        <Left>4.08208in</Left>
+        <Height>0.5in</Height>
+        <Width>1.95833in</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
     </ReportItems>
-    <Height>2in</Height>
+    <Height>3.13542in</Height>
     <Style />
   </Body>
-  <Width>6.5in</Width>
+  <Width>6.48833in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -372,6 +388,23 @@
         <rd:DataSetName>RDLCReport</rd:DataSetName>
         <rd:TableName>Person</rd:TableName>
         <rd:ObjectDataSourceType>RDLCReport.Person, RDLCReport, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>RDLCReport</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="bin">
+          <DataField>bin</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>RDLCReport</rd:DataSetName>
+        <rd:TableName>MyBarCode</rd:TableName>
+        <rd:ObjectDataSourceType>RDLCReport.MyBarCode, RDLCReport, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

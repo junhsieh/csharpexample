@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:RDLCReport"
         xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
         mc:Ignorable="d"
-        Title="MainWindow" Height="422.741" Width="795.934">
+        Title="MainWindow" Height="526.741" Width="990.934">
     <StackPanel>
         <Button x:Name="ShowReportBtn" Content="Show Report" Click="ShowReportBtn_Click"/>
         <Button x:Name="PrintReportSilentlyBtn" Content="Print Report Silently" Click="PrintReportSilentlyBtn_Click"/>
         <Button x:Name="PrintReportPDFBtn" Content="Print Report to PDF" Click="PrintReportPDFBtn_Click"/>
-        <WindowsFormsHost HorizontalAlignment="Left" Height="257" Margin="10,48,0,0" VerticalAlignment="Top" Width="725">
+        <WindowsFormsHost HorizontalAlignment="Left" Height="377" Margin="10,48,0,0" VerticalAlignment="Top" Width="950">
             <rv:ReportViewer x:Name="PrintDoc"/>
         </WindowsFormsHost>
     </StackPanel>
