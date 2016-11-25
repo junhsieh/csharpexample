@@ -10,25 +10,29 @@ namespace DataValidationMVVM.ViewModel
     {
         /*
          * 
-         */ 
+         */
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-                handler.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /*
          * 
-         */ 
+         */
         public Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         public bool HasErrors
         {
-            get { return _errors.Values.FirstOrDefault(l => l.Count > 0) != null; }
+            get
+            {
+                return _errors.Values.FirstOrDefault(l => l.Count > 0) != null;
+            }
         }
 
         public IEnumerable GetErrors(string propertyName)
@@ -40,9 +44,10 @@ namespace DataValidationMVVM.ViewModel
 
         public void RaiseErrorsChanged(string propertyName)
         {
-            EventHandler<DataErrorsChangedEventArgs> handler = ErrorsChanged;
-            if (handler != null)
-                handler.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            if (this.ErrorsChanged != null)
+            {
+                this.ErrorsChanged.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            }
         }
     }
 }
