@@ -8,9 +8,7 @@ namespace DataValidationMVVM.ViewModel
 {
     class ObservableBase : INotifyPropertyChanged, INotifyDataErrorInfo
     {
-        /*
-         * Implementing INotifyPropertyChanged
-         */
+        #region Implementing INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(string propertyName)
@@ -20,10 +18,9 @@ namespace DataValidationMVVM.ViewModel
                 this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        #endregion
 
-        /*
-         * Implementing INotifyDataErrorInfo
-         */
+        #region Implementing INotifyDataErrorInfo
         private Dictionary<string, List<string>> ErrorDict = new Dictionary<string, List<string>>();
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
@@ -93,5 +90,6 @@ namespace DataValidationMVVM.ViewModel
 
             return String.Join("\n", errArr);
         }
+        #endregion
     }
 }
