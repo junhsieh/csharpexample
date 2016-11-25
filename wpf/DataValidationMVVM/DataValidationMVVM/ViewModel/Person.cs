@@ -14,8 +14,8 @@ namespace DataValidationMVVM.ViewModel
                 if (_name != value)
                 {
                     _name = value;
-                    base.RaisePropertyChanged("Name");
                     Validate();
+                    base.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -29,8 +29,8 @@ namespace DataValidationMVVM.ViewModel
                 if (_age != value)
                 {
                     _age = value;
-                    base.RaisePropertyChanged("Name");
                     Validate();
+                    base.RaisePropertyChanged("Age");
                 }
             }
         }
@@ -51,14 +51,22 @@ namespace DataValidationMVVM.ViewModel
             lock (_lock)
             {
                 // Name
-                List<string> errorsForName = base.GetClearedPropertyError("Name");
+                List<string> errArrForName = base.GetClearedPropertyError("Name");
 
                 if (String.IsNullOrEmpty(this.Name))
-                    errorsForName.Add("The name could not be empty.");
+                    errArrForName.Add("The name could not be empty.");
                 if (this.Name != "a")
-                    errorsForName.Add("The name must be a.");
+                    errArrForName.Add("The name must be a.");
 
-                base.SetPropertyError("Name", errorsForName);
+                base.SetPropertyError("Name", errArrForName);
+
+                // Age
+                List<string> errArrForAge = base.GetClearedPropertyError("Age");
+
+                if (this.Age < 18)
+                    errArrForAge.Add("Age must be over 18.");
+
+                base.SetPropertyError("Age", errArrForAge);
             }
         }
     }

@@ -57,7 +57,7 @@ namespace DataValidationMVVM.ViewModel
 
             if (errArr.Count > 0)
             {
-                RaiseErrorsChanged(propertyName);
+                this.RaiseErrorsChanged(propertyName);
             }
         }
 

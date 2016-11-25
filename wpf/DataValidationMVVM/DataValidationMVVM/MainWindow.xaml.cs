@@ -14,18 +14,26 @@ namespace DataValidationMVVM
         public MainWindow()
         {
             InitializeComponent();
+            this.MainWindowViewModel.Person.Name = "a";
+            this.MainWindowViewModel.Person.Age = 19;
         }
 
         private void DebugBtn_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable errArr = this.MainWindowViewModel.Person.GetErrors("Name");
-
             Debug.WriteLine(DateTime.Now + " HasError: " + this.MainWindowViewModel.Person.HasErrors);
 
             if (this.MainWindowViewModel.Person.HasErrors == true)
             {
-                Debug.WriteLine(DateTime.Now + " HERE: " + String.Join(", ", errArr.Cast<string>()));
+                IEnumerable errArrForName = this.MainWindowViewModel.Person.GetErrors("Name");
+                Debug.WriteLine(DateTime.Now + " Name: " + String.Join(", ", errArrForName.Cast<string>()));
+
+                IEnumerable errArrForAge = this.MainWindowViewModel.Person.GetErrors("Age");
+                Debug.WriteLine(DateTime.Now + " Age: " + String.Join(", ", errArrForAge.Cast<string>()));
             }
+
+            Debug.WriteLine(DateTime.Now + " NameText: " + this.MainWindowViewModel.Person.Name);
+            Debug.WriteLine(DateTime.Now + " AgeText: " + this.MainWindowViewModel.Person.Age.ToString());
+            Debug.WriteLine("");
         }
     }
 
