@@ -14,8 +14,9 @@ namespace DataValidationMVVM
         public MainWindow()
         {
             InitializeComponent();
+
             //this.MainWindowViewModel.Person.Name = "jun";
-            //this.MainWindowViewModel.Person.Age = 19;
+            //this.MainWindowViewModel.Person.Age = 9;
         }
 
         private void DebugBtn_Click(object sender, RoutedEventArgs e)

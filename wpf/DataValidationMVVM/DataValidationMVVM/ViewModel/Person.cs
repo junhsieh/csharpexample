@@ -16,8 +16,8 @@ namespace DataValidationMVVM.ViewModel
                 if (_Name != value)
                 {
                     _Name = value;
-                    Validate("Name");
                     base.RaisePropertyChanged("Name");
+                    Validate("Name");
                 }
             }
         }
@@ -31,8 +31,8 @@ namespace DataValidationMVVM.ViewModel
                 if (_Age != value)
                 {
                     _Age = value;
-                    Validate("Age");
                     base.RaisePropertyChanged("Age");
+                    Validate("Age");
                 }
             }
         }
