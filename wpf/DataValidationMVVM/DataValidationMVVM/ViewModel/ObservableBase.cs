@@ -77,9 +77,21 @@ namespace DataValidationMVVM.ViewModel
             return errArr;
         }
 
-        public string GetErrorStr(string propertyName)
+        public string GetAllErrorStr(string[] fieldArr)
         {
-            return String.Join("; ", GetErrors(propertyName).Cast<string>());
+            List<string> errArr = new List<string>();
+
+            foreach (string field in fieldArr)
+            {
+                IEnumerable<string> eArr = GetErrors(field).Cast<string>();
+
+                if (eArr.Count<string>() > 0)
+                {
+                    errArr.Add(field + ": " + String.Join("; ", eArr));
+                }
+            }
+
+            return String.Join("\n", errArr);
         }
     }
 }

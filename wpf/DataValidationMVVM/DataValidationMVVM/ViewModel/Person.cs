@@ -16,7 +16,7 @@ namespace DataValidationMVVM.ViewModel
                 if (_Name != value)
                 {
                     _Name = value;
-                    Validate();
+                    Validate("Name");
                     base.RaisePropertyChanged("Name");
                 }
             }
@@ -31,7 +31,7 @@ namespace DataValidationMVVM.ViewModel
                 if (_Age != value)
                 {
                     _Age = value;
-                    Validate();
+                    Validate("Age");
                     base.RaisePropertyChanged("Age");
                 }
             }
@@ -39,44 +39,47 @@ namespace DataValidationMVVM.ViewModel
 
         public string Errors
         {
-            get { return base.HasErrors == true ? base.GetErrorStr("Name") : ""; }
+            get
+            {
+                string[] fieldArr = new string[] { "Name", "Age"};
+                return base.HasErrors == true ? base.GetAllErrorStr(fieldArr) : "";
+            }
         }
 
-        private void Validate()
+        private void Validate(string propertyName)
         {
             //int WaitSecondsBeforeValidation = 2;
             //Task waitTask = new Task(() => Thread.Sleep(TimeSpan.FromSeconds(WaitSecondsBeforeValidation)));
             //waitTask.ContinueWith((_) => RealValidation());
             //waitTask.Start();
 
-            RealValidation();
+            RealValidation(propertyName);
         }
 
         private object _lock = new object();
-        private void RealValidation()
+        private void RealValidation(string propertyName)
         {
             lock (_lock)
             {
-                // Name
-                List<string> errArrForName = base.GetClearedPropertyError("Name");
+                List<string> errArr = base.GetClearedPropertyError(propertyName);
 
-                if (String.IsNullOrEmpty(this.Name))
-                    errArrForName.Add("The name could not be empty.");
-                if (this.Name != "jun")
-                    errArrForName.Add("The name must be jun.");
+                switch (propertyName)
+                {
+                    case "Name":
+                        if (String.IsNullOrEmpty(this.Name))
+                            errArr.Add("The name could not be empty.");
+                        if (this.Name != "jun")
+                            errArr.Add("The name must be jun.");
+                        break;
+                    case "Age":
+                        if (String.IsNullOrEmpty(this.Age.ToString()))
+                            errArr.Add("The Age could not be empty.");
+                        if (this.Age < 18)
+                            errArr.Add("Age must be over 18.");
+                        break;
+                }
 
-                base.SetPropertyError("Name", errArrForName);
-                //this.NameErr = base.GetErrorStr("Name");
-
-                // Age
-                List<string> errArrForAge = base.GetClearedPropertyError("Age");
-
-                if (this.Age < 18)
-                    errArrForAge.Add("Age must be over 18.");
-
-                base.SetPropertyError("Age", errArrForAge);
-
-                // Errors
+                base.SetPropertyError(propertyName, errArr);
                 base.RaisePropertyChanged("Errors");
             }
         }

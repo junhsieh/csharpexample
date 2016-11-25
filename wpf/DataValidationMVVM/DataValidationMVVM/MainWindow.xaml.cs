@@ -14,8 +14,8 @@ namespace DataValidationMVVM
         public MainWindow()
         {
             InitializeComponent();
-            this.MainWindowViewModel.Person.Name = "jun";
-            this.MainWindowViewModel.Person.Age = 19;
+            //this.MainWindowViewModel.Person.Name = "jun";
+            //this.MainWindowViewModel.Person.Age = 19;
         }
 
         private void DebugBtn_Click(object sender, RoutedEventArgs e)
@@ -25,10 +25,12 @@ namespace DataValidationMVVM
             if (this.MainWindowViewModel.Person.HasErrors == true)
             {
                 IEnumerable errArrForName = this.MainWindowViewModel.Person.GetErrors("Name");
-                Debug.WriteLine(DateTime.Now + " Name: " + String.Join(", ", errArrForName.Cast<string>()));
+                if (errArrForName != null)
+                    Debug.WriteLine(DateTime.Now + " Name: " + String.Join(", ", errArrForName.Cast<string>()));
 
                 IEnumerable errArrForAge = this.MainWindowViewModel.Person.GetErrors("Age");
-                Debug.WriteLine(DateTime.Now + " Age: " + String.Join(", ", errArrForAge.Cast<string>()));
+                if (errArrForAge != null)
+                    Debug.WriteLine(DateTime.Now + " Age: " + String.Join(", ", errArrForAge.Cast<string>()));
             }
 
             Debug.WriteLine(DateTime.Now + " NameText: " + this.MainWindowViewModel.Person.Name);
