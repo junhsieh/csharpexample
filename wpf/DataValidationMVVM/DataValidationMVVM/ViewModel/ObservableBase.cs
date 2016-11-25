@@ -76,5 +76,10 @@ namespace DataValidationMVVM.ViewModel
 
             return errArr;
         }
+
+        public string GetErrorStr(string propertyName)
+        {
+            return String.Join("; ", GetErrors(propertyName).Cast<string>());
+        }
     }
 }

@@ -1,38 +1,45 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataValidationMVVM.ViewModel
 {
     class Person : ObservableBase
     {
-        private string _name;
+        private string _Name;
         public string Name
         {
-            get { return _name; }
+            get { return _Name; }
             set
             {
-                if (_name != value)
+                if (_Name != value)
                 {
-                    _name = value;
+                    _Name = value;
                     Validate();
                     base.RaisePropertyChanged("Name");
                 }
             }
         }
 
-        private int _age;
+        private int _Age;
         public int Age
         {
-            get { return _age; }
+            get { return _Age; }
             set
             {
-                if (_age != value)
+                if (_Age != value)
                 {
-                    _age = value;
+                    _Age = value;
                     Validate();
                     base.RaisePropertyChanged("Age");
                 }
             }
+        }
+
+        public string Errors
+        {
+            get { return base.HasErrors == true ? base.GetErrorStr("Name") : ""; }
         }
 
         private void Validate()
@@ -55,10 +62,11 @@ namespace DataValidationMVVM.ViewModel
 
                 if (String.IsNullOrEmpty(this.Name))
                     errArrForName.Add("The name could not be empty.");
-                if (this.Name != "a")
-                    errArrForName.Add("The name must be a.");
+                if (this.Name != "jun")
+                    errArrForName.Add("The name must be jun.");
 
                 base.SetPropertyError("Name", errArrForName);
+                //this.NameErr = base.GetErrorStr("Name");
 
                 // Age
                 List<string> errArrForAge = base.GetClearedPropertyError("Age");
@@ -67,6 +75,9 @@ namespace DataValidationMVVM.ViewModel
                     errArrForAge.Add("Age must be over 18.");
 
                 base.SetPropertyError("Age", errArrForAge);
+
+                // Errors
+                base.RaisePropertyChanged("Errors");
             }
         }
     }
