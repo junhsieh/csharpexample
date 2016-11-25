@@ -9,7 +9,7 @@ namespace DataValidationMVVM.ViewModel
     class ObservableBase : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         /*
-         * 
+         * Implementing INotifyPropertyChanged
          */
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,24 +22,25 @@ namespace DataValidationMVVM.ViewModel
         }
 
         /*
-         * 
+         * Implementing INotifyDataErrorInfo
          */
-        public Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
+        private Dictionary<string, List<string>> ErrorDict = new Dictionary<string, List<string>>();
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         public bool HasErrors
         {
             get
             {
-                return _errors.Values.FirstOrDefault(l => l.Count > 0) != null;
+                return this.ErrorDict.Values.Any((l) => l.Count > 0);
+                //return ErrorDict.Values.FirstOrDefault((l) => l.Count > 0) != null;
             }
         }
 
         public IEnumerable GetErrors(string propertyName)
         {
-            List<string> errorsForName;
-            _errors.TryGetValue(propertyName, out errorsForName);
-            return errorsForName;
+            List<string> errArr;
+            this.ErrorDict.TryGetValue(propertyName, out errArr);
+            return errArr;
         }
 
         public void RaiseErrorsChanged(string propertyName)
@@ -48,6 +49,32 @@ namespace DataValidationMVVM.ViewModel
             {
                 this.ErrorsChanged.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             }
+        }
+
+        public void SetPropertyError(string propertyName, List<string> errArr)
+        {
+            this.ErrorDict[propertyName] = errArr;
+
+            if (errArr.Count > 0)
+            {
+                RaiseErrorsChanged(propertyName);
+            }
+        }
+
+        public List<string> GetClearedPropertyError(string propertyName)
+        {
+            List<string> errArr;
+
+            if (this.ErrorDict.TryGetValue(propertyName, out errArr) != true)
+            {
+                errArr = new List<string>();
+            }
+            else
+            {
+                errArr.Clear();
+            }
+
+            return errArr;
         }
     }
 }

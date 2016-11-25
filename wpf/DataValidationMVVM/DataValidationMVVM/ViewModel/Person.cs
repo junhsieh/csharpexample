@@ -14,7 +14,7 @@ namespace DataValidationMVVM.ViewModel
                 if (_name != value)
                 {
                     _name = value;
-                    RaisePropertyChanged("Name");
+                    base.RaisePropertyChanged("Name");
                     Validate();
                 }
             }
@@ -29,7 +29,7 @@ namespace DataValidationMVVM.ViewModel
                 if (_age != value)
                 {
                     _age = value;
-                    RaisePropertyChanged("Name");
+                    base.RaisePropertyChanged("Name");
                     Validate();
                 }
             }
@@ -38,7 +38,6 @@ namespace DataValidationMVVM.ViewModel
         private void Validate()
         {
             //int WaitSecondsBeforeValidation = 2;
-
             //Task waitTask = new Task(() => Thread.Sleep(TimeSpan.FromSeconds(WaitSecondsBeforeValidation)));
             //waitTask.ContinueWith((_) => RealValidation());
             //waitTask.Start();
@@ -51,21 +50,15 @@ namespace DataValidationMVVM.ViewModel
         {
             lock (_lock)
             {
-                //Validate Name
-                List<string> errorsForName;
-                if (!_errors.TryGetValue("Name", out errorsForName))
-                    errorsForName = new List<string>();
-                else
-                    errorsForName.Clear();
+                // Name
+                List<string> errorsForName = base.GetClearedPropertyError("Name");
 
-                if (String.IsNullOrEmpty(Name))
+                if (String.IsNullOrEmpty(this.Name))
                     errorsForName.Add("The name could not be empty.");
-                if (Name != "a")
+                if (this.Name != "a")
                     errorsForName.Add("The name must be a.");
 
-                _errors["Name"] = errorsForName;
-                if (errorsForName.Count > 0)
-                    RaiseErrorsChanged("Name");
+                base.SetPropertyError("Name", errorsForName);
             }
         }
     }

@@ -21,7 +21,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="Name"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Person.Name, ValidatesOnDataErrors=True}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Person.Name, ValidatesOnNotifyDataErrors=True}"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Age"/>
             <TextBox Grid.Row="1" Grid.Column="1"/>
             <Button Grid.Row="2" Grid.Column="1" x:Name="DebugBtn"  Content="Debug" Click="DebugBtn_Click"/>

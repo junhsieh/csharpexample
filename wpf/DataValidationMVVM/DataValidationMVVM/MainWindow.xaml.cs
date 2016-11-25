@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -17,16 +18,13 @@ namespace DataValidationMVVM
 
         private void DebugBtn_Click(object sender, RoutedEventArgs e)
         {
-            var test = this.MainWindowViewModel.Person.GetErrors("Name");
+            IEnumerable errArr = this.MainWindowViewModel.Person.GetErrors("Name");
 
-            if (test != null)
+            Debug.WriteLine(DateTime.Now + " HasError: " + this.MainWindowViewModel.Person.HasErrors);
+
+            if (this.MainWindowViewModel.Person.HasErrors == true)
             {
-                var str = String.Join(", ", test.Cast<string>());
-                Debug.WriteLine(DateTime.Now + " HERE: " + str);
-            }
-            else
-            {
-                Debug.WriteLine(DateTime.Now + " HERE: null");
+                Debug.WriteLine(DateTime.Now + " HERE: " + String.Join(", ", errArr.Cast<string>()));
             }
         }
     }
