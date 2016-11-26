@@ -20,7 +20,7 @@ namespace DataValidationMVVM
             //this.MainWindowViewModel.Person.Name = "jun2";
             //this.MainWindowViewModel.Person.Age = 9;
 
-            // this is for catching the exception. Ex: binding a int to a TextBox.
+            // Note: this is for catching the exception. Ex: binding an integer to a TextBox.
             // make sure you do add these in XAML: ValidatesOnExceptions=True, NotifyOnValidationError=True
             //this.AddHandler(System.Windows.Controls.Validation.ErrorEvent, new RoutedEventHandler(OnValidationRaised));
         }
@@ -36,9 +36,6 @@ namespace DataValidationMVVM
             //string name = dpobj.GetValue(FrameworkElement.NameProperty) as string;
 
             Binding myBinding = BindingOperations.GetBinding(((Control)e.OriginalSource), TextBox.TextProperty);
-
-            // Path  Person.Age
-            //this.MainWindowViewModel.Person.RealValidation("Age");
 
             if (this.MainWindowViewModel != null)
             {
