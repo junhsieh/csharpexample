@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DataValidationMVVM.ViewModel
 {
@@ -22,7 +20,7 @@ namespace DataValidationMVVM.ViewModel
             }
         }
 
-        private int _Age;
+        private int _Age = 0;
         public int Age
         {
             get { return _Age; }
@@ -37,13 +35,24 @@ namespace DataValidationMVVM.ViewModel
             }
         }
 
+        private string _Errors;
         public string Errors
         {
             get
             {
-                string[] fieldArr = new string[] { "Name", "Age"};
+                string[] fieldArr = new string[] { "Name", "Age" };
                 return base.HasErrors == true ? base.GetAllErrorStr(fieldArr) : "";
             }
+            set
+            {
+                _Errors = value;
+                base.RaisePropertyChanged("Errors");
+            }
+        }
+        private void SetErrors()
+        {
+            string[] fieldArr = new string[] { "Name", "Age" };
+            this.Errors = base.HasErrors == true ? base.GetAllErrorStr(fieldArr) : "";
         }
 
         private void Validate(string propertyName)
@@ -80,7 +89,7 @@ namespace DataValidationMVVM.ViewModel
                 }
 
                 base.SetPropertyError(propertyName, errArr);
-                base.RaisePropertyChanged("Errors");
+                this.SetErrors();
             }
         }
     }

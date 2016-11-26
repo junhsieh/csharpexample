@@ -3,6 +3,8 @@ using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace DataValidationMVVM
 {
@@ -15,8 +17,45 @@ namespace DataValidationMVVM
         {
             InitializeComponent();
 
-            //this.MainWindowViewModel.Person.Name = "jun";
+            //this.MainWindowViewModel.Person.Name = "jun2";
             //this.MainWindowViewModel.Person.Age = 9;
+
+            // this is for catching the exception. Ex: binding a TextBox
+            // ValidatesOnExceptions=True, NotifyOnValidationError=True
+            //this.AddHandler(System.Windows.Controls.Validation.ErrorEvent, new RoutedEventHandler(OnValidationRaised));
+        }
+
+        private void OnValidationRaised(object sender, RoutedEventArgs e)
+        {
+            var args = (System.Windows.Controls.ValidationErrorEventArgs)e;
+
+            //var test = ((Control)e.OriginalSource).Name;
+            //Debug.WriteLine(DateTime.Now + " HERE: " + test);
+
+            //DependencyObject dpobj = sender as DependencyObject;
+            //string name = dpobj.GetValue(FrameworkElement.NameProperty) as string;
+
+            Binding myBinding = BindingOperations.GetBinding(((Control)e.OriginalSource), TextBox.TextProperty);
+
+            // Path  Person.Age
+            //this.MainWindowViewModel.Person.RealValidation("Age");
+
+            if (this.MainWindowViewModel != null)
+            {
+                // Check if the error was caused by an exception
+                if (args.Error.RuleInError is ExceptionValidationRule)
+                {
+                    // Add or remove the error from the ViewModel
+                    if (args.Action == ValidationErrorEventAction.Added)
+                    {
+                        //this.MainWindowViewModel.AddUIValidationError();
+                    }
+                    else if (args.Action == ValidationErrorEventAction.Removed)
+                    {
+                        //this.MainWindowViewModel.RemoveUIValidationError();
+                    }
+                }
+            }
         }
 
         private void DebugBtn_Click(object sender, RoutedEventArgs e)

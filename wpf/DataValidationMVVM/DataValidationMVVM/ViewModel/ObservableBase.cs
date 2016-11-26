@@ -36,7 +36,10 @@ namespace DataValidationMVVM.ViewModel
         public IEnumerable GetErrors(string propertyName)
         {
             List<string> errArr;
-            this.ErrorDict.TryGetValue(propertyName, out errArr);
+            if (this.ErrorDict.TryGetValue(propertyName, out errArr) != true)
+            {
+                errArr = new List<string>();
+            }
             return errArr;
         }
 
@@ -80,7 +83,7 @@ namespace DataValidationMVVM.ViewModel
 
             foreach (string field in fieldArr)
             {
-                IEnumerable<string> eArr = GetErrors(field).Cast<string>();
+                IEnumerable<string> eArr = this.GetErrors(field).Cast<string>();
 
                 if (eArr.Count<string>() > 0)
                 {
