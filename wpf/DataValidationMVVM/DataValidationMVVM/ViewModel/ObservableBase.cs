@@ -65,13 +65,13 @@ namespace DataValidationMVVM.ViewModel
             this.ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propName));
         }
 
-        public void SetPropertyError(string propertyName, List<string> errArr)
+        public void SetPropertyError(string propName, List<string> errArr)
         {
-            this.ErrorDict[propertyName] = errArr;
+            this.ErrorDict[propName] = errArr;
 
             if (errArr.Count > 0)
             {
-                this.NotifyErrorsChanged(propertyName);
+                this.NotifyErrorsChanged(propName);
             }
         }
 
