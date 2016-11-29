@@ -14,7 +14,7 @@ namespace DataValidationMVVM.ViewModel
                 if (_Name != value)
                 {
                     _Name = value;
-                    base.RaisePropertyChanged("Name");
+                    base.NotifyPropertyChanged("Name");
                     Validate("Name");
                 }
             }
@@ -29,7 +29,7 @@ namespace DataValidationMVVM.ViewModel
                 if (_Age != value)
                 {
                     _Age = value;
-                    base.RaisePropertyChanged("Age");
+                    base.NotifyPropertyChanged("Age");
                     Validate("Age");
                 }
             }
@@ -46,7 +46,7 @@ namespace DataValidationMVVM.ViewModel
             set
             {
                 _Errors = value;
-                base.RaisePropertyChanged("Errors");
+                base.NotifyPropertyChanged("Errors");
             }
         }
         private void SetErrors()

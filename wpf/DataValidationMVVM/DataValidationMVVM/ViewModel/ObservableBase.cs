@@ -11,12 +11,20 @@ namespace DataValidationMVVM.ViewModel
         #region Implementing INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void RaisePropertyChanged(string propertyName)
+        public void NotifyPropertyChanged(string propName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
+            // old way
+            // NOTE: By storing a local copy of the event handler, we make sure to test and execute the same instance, hence solving the possible NullReferenceException.
+            //PropertyChangedEventHandler _PropertyChanged = this.PropertyChanged;
+
+            //if (_PropertyChanged != null)
+            //{
+            //    _PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            //    //_PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propName));
+            //}
+
+            // new way .Net 4.6
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
         #endregion
 
@@ -33,22 +41,28 @@ namespace DataValidationMVVM.ViewModel
             }
         }
 
-        public IEnumerable GetErrors(string propertyName)
+        public IEnumerable GetErrors(string propName)
         {
             List<string> errArr;
-            if (this.ErrorDict.TryGetValue(propertyName, out errArr) != true)
+            if (this.ErrorDict.TryGetValue(propName, out errArr) != true)
             {
                 errArr = new List<string>();
             }
             return errArr;
         }
 
-        public void RaiseErrorsChanged(string propertyName)
+        public void NotifyErrorsChanged(string propName)
         {
-            if (this.ErrorsChanged != null)
-            {
-                this.ErrorsChanged.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            }
+            // old way
+            //EventHandler<DataErrorsChangedEventArgs> _ErrorsChanged = this.ErrorsChanged;
+            //if (_ErrorsChanged != null)
+            //{
+            //    _ErrorsChanged(this, new DataErrorsChangedEventArgs(propName));
+            //    //_ErrorsChanged.Invoke(this, new DataErrorsChangedEventArgs(propName));
+            //}
+
+            // new way .Net 4.6
+            this.ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propName));
         }
 
         public void SetPropertyError(string propertyName, List<string> errArr)
@@ -57,15 +71,15 @@ namespace DataValidationMVVM.ViewModel
 
             if (errArr.Count > 0)
             {
-                this.RaiseErrorsChanged(propertyName);
+                this.NotifyErrorsChanged(propertyName);
             }
         }
 
-        public List<string> GetClearedPropertyError(string propertyName)
+        public List<string> GetClearedPropertyError(string propName)
         {
             List<string> errArr;
 
-            if (this.ErrorDict.TryGetValue(propertyName, out errArr) != true)
+            if (this.ErrorDict.TryGetValue(propName, out errArr) != true)
             {
                 errArr = new List<string>();
             }
