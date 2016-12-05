@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525"
         xmlns:toolkit1="clr-namespace:System.Windows.Controls;assembly=WPFToolkit"
-        xmlns:toolkit2="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit">
+        xmlns:toolkit2="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit" ContentRendered="Window_ContentRendered">
     <StackPanel>
         <StackPanel.DataContext>
             <local:MainWindowViewModel x:Name="MainWindowViewModel"/>
@@ -23,9 +23,29 @@
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="Item Name:"/>
             <toolkit2:AutoCompleteBox Grid.Row="0" Grid.Column="1" Width="400"
+                                      x:Name="IDItemBox"
                                       ItemsSource="{Binding SalOrder.IDItemOptArr}"
+                                      SelectedItem="{Binding ItemAC}"
+                                      ValueMemberPath="Text"
+                                      IsTextCompletionEnabled="False"
+                                      FilterMode="Contains"
                                       >
-
+                <!--
+                <toolkit2:AutoCompleteBox.ItemContainerStyle>
+                    <Style TargetType="AutoCompleteBoxItem">
+                        <Setter Property="Width" Value="400"/>
+                    </Style>
+                </toolkit2:AutoCompleteBox.ItemContainerStyle>
+                -->
+                <toolkit2:AutoCompleteBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Text}"/>
+                            <TextBlock Text="{Binding Path=ID.IDItem}" Background="Pink" Margin="10,0,0,0"/>
+                            <TextBlock Text="{Binding Path=ID.ItemNum}" Background="Yellow" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </toolkit2:AutoCompleteBox.ItemTemplate>
             </toolkit2:AutoCompleteBox>
         </Grid>
     </StackPanel>

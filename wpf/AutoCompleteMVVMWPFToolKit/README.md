@@ -1,3 +1,7 @@
+To install Newtonsoft.Json, run the following command in the Package Manager Console:
+
+PM&gt; Install-Package Newtonsoft.Json -Version 9.0.1
+
 To install WPF Toolkit, run the following command in the Package Manager Console:
 
 PM&gt; Install-Package WPFToolkit
