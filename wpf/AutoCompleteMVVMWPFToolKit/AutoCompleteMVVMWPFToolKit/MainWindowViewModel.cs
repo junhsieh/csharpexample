@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace AutoCompleteMVVMWPFToolKit
 {
@@ -55,6 +56,32 @@ namespace AutoCompleteMVVMWPFToolKit
             itemArr.ForEach((d) => oc.Add(new ViewModel.ObjectOpt() { ID = d, Text = d.ItemName }));
 
             this.IDItemOptArr = oc;
+        }
+
+        public AutoCompleteFilterPredicate<object> IDItemOptArrFilter
+        {
+            get
+            {
+                AutoCompleteFilterPredicate<object> result = (searchText, obj) =>
+                {
+                    var item = ((ItemAC)((ViewModel.ObjectOpt)obj).ID);
+
+                    if (item != null)
+                    {
+                        if (item.ItemName.ToLower().Contains(searchText))
+                        {
+                            return true;
+                        }
+                        else if (item.ItemNum.ToLower().Contains(searchText))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+
+                return result;
+            }
         }
     }
 }

@@ -29,6 +29,7 @@
                                       ValueMemberPath="Text"
                                       IsTextCompletionEnabled="False"
                                       FilterMode="Contains"
+                                      ItemFilter="{Binding SalOrder.IDItemOptArrFilter}" 
                                       >
                 <!--
                 <toolkit2:AutoCompleteBox.ItemContainerStyle>
