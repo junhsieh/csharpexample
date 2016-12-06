@@ -31,7 +31,18 @@ namespace AutoCompleteMVVMWPFToolKit.ViewModel
             optArr.ToList().ForEach(d => d.IsSelected = false);
 
             //
-            optArr.Where((d) => ObjectOptUtil.ConvObjToT<T>(d.ID).Equals(value)).Skip(0).Take(1).ToList().ForEach((d) => d.IsSelected = true);
+            //optArr.Where((d) => ObjectOptUtil.ConvObjToT<T>(d.ID).Equals(value)).Skip(0).Take(1).ToList().ForEach((d) => d.IsSelected = true);
+
+            if (value != null)
+            {
+                foreach (var item in optArr)
+                {
+                    if (ObjectOptUtil.ConvObjToT<T>(item.ID).Equals(value) == true)
+                    {
+                        Debug.WriteLine("Good");
+                    }
+                }
+            }
         }
 
         public static string GetText(ObservableCollection<ObjectOpt> optArr)

@@ -23,7 +23,11 @@ namespace AutoCompleteMVVMWPFToolKit
         public string ItemName { get { return ViewModel.ObjectOptSingleUtil.GetText(this.IDItemOptArr); } }
         public ItemAC IDItem
         {
-            get { return ViewModel.ObjectOptSingleUtil.GetID<ItemAC>(this.IDItemOptArr); }
+            get
+            {
+                var test = ViewModel.ObjectOptSingleUtil.GetID<ItemAC>(this.IDItemOptArr);
+                return test;
+            }
             set
             {
                 ViewModel.ObjectOptSingleUtil.SetID<ItemAC>(this.IDItemOptArr, value);
@@ -36,8 +40,11 @@ namespace AutoCompleteMVVMWPFToolKit
             get { return _IDItemOptArr; }
             set
             {
-                _IDItemOptArr = value;
-                base.NotifyPropertyChanged("IDItemOptArr");
+                if (value != null)
+                {
+                    _IDItemOptArr = value;
+                    base.NotifyPropertyChanged("IDItemOptArr");
+                }
             }
         }
 
@@ -64,7 +71,7 @@ namespace AutoCompleteMVVMWPFToolKit
             {
                 AutoCompleteFilterPredicate<object> result = (searchText, obj) =>
                 {
-                    var item = ((ItemAC)((ViewModel.ObjectOpt)obj).ID);
+                    var item = (ItemAC)((ViewModel.ObjectOpt)obj).ID;
 
                     if (item != null)
                     {

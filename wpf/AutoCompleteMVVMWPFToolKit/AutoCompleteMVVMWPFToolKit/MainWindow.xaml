@@ -25,29 +25,23 @@
             <toolkit2:AutoCompleteBox Grid.Row="0" Grid.Column="1" Width="400"
                                       x:Name="IDItemBox"
                                       ItemsSource="{Binding Path=SalOrder.IDItemOptArr}"
-                                      SelectedItem="{Binding Path=ItemAC}"
+                                      SelectedItem="{Binding Path=SalOrder.IDItem, Mode=TwoWay}"
                                       ValueMemberPath="Text"
                                       IsTextCompletionEnabled="False"
                                       FilterMode="Contains"
                                       ItemFilter="{Binding Path=SalOrder.IDItemOptArrFilter}"
                                       >
-                <!--
-                <toolkit2:AutoCompleteBox.ItemContainerStyle>
-                    <Style TargetType="AutoCompleteBoxItem">
-                        <Setter Property="Width" Value="400"/>
-                    </Style>
-                </toolkit2:AutoCompleteBox.ItemContainerStyle>
-                -->
                 <toolkit2:AutoCompleteBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Path=Text}"/>
-                            <TextBlock Text="{Binding Path=ID.IDItem}" Background="Pink" Margin="10,0,0,0"/>
+                            <TextBlock Text="{Binding Path=ID.IDItem}" Background="Green" Margin="10,0,0,0"/>
                             <TextBlock Text="{Binding Path=ID.ItemNum}" Background="Yellow" Margin="10,0,0,0"/>
                         </StackPanel>
                     </DataTemplate>
                 </toolkit2:AutoCompleteBox.ItemTemplate>
             </toolkit2:AutoCompleteBox>
         </Grid>
+        <Button x:Name="DebugBtn" Content="Debug" Click="DebugBtn_Click"/>
     </StackPanel>
 </Window>

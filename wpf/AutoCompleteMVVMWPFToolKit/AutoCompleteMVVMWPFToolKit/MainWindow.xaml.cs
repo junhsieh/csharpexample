@@ -85,9 +85,21 @@ namespace AutoCompleteMVVMWPFToolKit
 
             if (item != null)
             {
-                var test = (ItemAC)item.ID;
-                Debug.WriteLine("HERE: " + test.IDItem + "_" + test.ItemNum + "_" + test.ItemName);
+                //var test = (ItemAC)item.ID;
+                //Debug.WriteLine("HERE: " + test.IDItem + "_" + test.ItemNum + "_" + test.ItemName);
             }
+        }
+
+        private void DebugBtn_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+            this.MainWindowViewModel.SalOrder.IDItem = new ItemAC() {
+                IDItem = 1296,
+                ItemNum = "B01CGU",
+                ItemName = "Under Seat Bag for Challenger Grande",
+            };
+            */
+            Debug.WriteLine("Value: " + this.MainWindowViewModel.SalOrder.IDItem);
         }
     }
 
