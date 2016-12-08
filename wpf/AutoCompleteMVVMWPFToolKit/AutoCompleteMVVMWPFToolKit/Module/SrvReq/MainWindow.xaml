@@ -1,0 +1,98 @@
+﻿<Window x:Class="AutoCompleteMVVMWPFToolKit.Module.SrvReq.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoCompleteMVVMWPFToolKit.Module.SrvReq"
+        mc:Ignorable="d"
+        xmlns:toolkit2="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
+        Title="MainWindow" Height="600" Width="800">
+    <StackPanel>
+        <StackPanel.DataContext>
+            <local:MainWindowViewModel x:Name="MainWindowViewModel"/>
+        </StackPanel.DataContext>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Item"/>
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                <ItemsControl ItemsSource="{Binding Path=SrvReqCore.ItemSingle.OptArr}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton GroupName="ItemGroup" Content="{Binding Path=ItemName}" IsChecked="{Binding Path=IsSelected}" Margin="0,6,10,0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <Button Grid.Row="1" Grid.Column="1" x:Name="SetItemBtn" Content="Set Item" Width="100" HorizontalAlignment="Left" Click="SetItemBtn_Click"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Warranty:"/>
+            <StackPanel Grid.Row="2" Grid.Column="1">
+                <ItemsControl ItemsSource="{Binding Path=SrvReqCore.WarrantyMultiple.OptArr}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding Path=Text}" IsChecked="{Binding Path=IsSelected}" Margin="0,6,10,0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <Button Grid.Row="3" Grid.Column="1" x:Name="SetWarrantyBtn" Content="Set Warranty" Width="100" HorizontalAlignment="Left" Click="SetWarrantyBtn_Click"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Country"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Path=SrvReqCore.CountrySingle.OptArr}" SelectedValuePath="ID" SelectedValue="{Binding Path=SrvReqCore.IDCountry}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Text}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Grid.Row="5" Grid.Column="1" x:Name="SetCountryBtn" Content="Set Country" Width="100" HorizontalAlignment="Left" Click="SetCountryBtn_Click"/>
+            <Label Grid.Row="6" Grid.Column="0" Content="Dealer:"/>
+            <toolkit2:AutoCompleteBox Grid.Row="6" Grid.Column="1" Width="400"
+                                      HorizontalAlignment="Left"
+                                      x:Name="IDDealerBox"
+                                      ItemsSource="{Binding Path=SrvReqCore.DealerSingle.OptArr}"
+                                      SelectedItem="{Binding Path=SrvReqCore.Dealer, Mode=TwoWay}"
+                                      ValueMemberPath="DealerName"
+                                      IsTextCompletionEnabled="False"
+                                      FilterMode="Contains"
+                                      ItemFilter="{Binding Path=SrvReqCore.DealerFilter}"
+                                      >
+                <toolkit2:AutoCompleteBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=City}" Background="Yellow" Margin="10,0,0,0"/>
+                            <TextBlock Text="{Binding Path=DealerName}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </toolkit2:AutoCompleteBox.ItemTemplate>
+            </toolkit2:AutoCompleteBox>
+            <Button Grid.Row="7" Grid.Column="1" x:Name="SetDealerBtn" Content="Set Dealer" Width="100" HorizontalAlignment="Left" Click="SetDealerBtn_Click"/>
+            <Button Grid.Row="8" Grid.Column="1" x:Name="ShowValueBtn" Content="Show Value" Width="100" HorizontalAlignment="Left" Click="ShowValueBtn_Click"/>
+            <TextBox Grid.Row="9" Grid.Column="1" x:Name="DebugBox" Width="600" Height="300" HorizontalAlignment="Left" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </Grid>
+    </StackPanel>
+</Window>
