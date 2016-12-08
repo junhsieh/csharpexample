@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AutoCompleteMVVMWPFToolKit")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("hmm")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AutoCompleteMVVMWPFToolKit")]
