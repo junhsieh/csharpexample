@@ -92,7 +92,9 @@
                 </toolkit2:AutoCompleteBox.ItemTemplate>
             </toolkit2:AutoCompleteBox>
             <Button Grid.Row="7" Grid.Column="1" x:Name="SetDealerBtn" Content="Set Dealer" Width="100" HorizontalAlignment="Left" Click="SetDealerBtn_Click"/>
+            <Label Grid.Row="8" Grid.Column="0" Content="Show:"/>
             <Button Grid.Row="8" Grid.Column="1" x:Name="ShowValueBtn" Content="Show Value" Width="100" HorizontalAlignment="Left" Click="ShowValueBtn_Click"/>
+            <Label Grid.Row="9" Grid.Column="0" Content="Debug:"/>
             <TextBox Grid.Row="9" Grid.Column="1" x:Name="DebugBox" Width="600" Height="300" HorizontalAlignment="Left" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         </Grid>
     </StackPanel>
