@@ -18,8 +18,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
         // Item
         public int IDItem
         {
-            get {
-                return ItemSingle.SelectedID; }
+            get { return ItemSingle.SelectedID; }
             set { ItemSingle.SelectedID = value; }
         }
         public ViewModel.ObjectOptSingle<Item> ItemSingle { get; set; }
@@ -57,10 +56,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
         public ViewModel.ObjectOptSingle<Dealer> DealerSingle { get; set; }
         public Dealer Dealer
         {
-            get
-            {
-                return DealerSingle.GetSelectedObj();
-            }
+            get { return DealerSingle.GetSelectedObj(); }
             set
             {
                 if (value != null)
