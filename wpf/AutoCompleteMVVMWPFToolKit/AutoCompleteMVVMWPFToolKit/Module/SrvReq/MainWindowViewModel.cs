@@ -18,7 +18,8 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
         // Item
         public int IDItem
         {
-            get { return ItemSingle.SelectedID; }
+            get {
+                return ItemSingle.SelectedID; }
             set { ItemSingle.SelectedID = value; }
         }
         public ViewModel.ObjectOptSingle<Item> ItemSingle { get; set; }
@@ -38,7 +39,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             set
             {
                 CountrySingle.SelectedID = value;
-                base.NotifyPropertyChanged("IDCountry");
+                base.NotifyPropertyChanged("IDCountry"); // need this if it is a ComboBox.
             }
         }
         public ViewModel.ObjectOptSingle<Country> CountrySingle { get; set; }
@@ -50,7 +51,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             set
             {
                 DealerSingle.SelectedID = value;
-                base.NotifyPropertyChanged("Dealer");
+                base.NotifyPropertyChanged("Dealer"); // need this if it a AutocompleteBox.
             }
         }
         public ViewModel.ObjectOptSingle<Dealer> DealerSingle { get; set; }

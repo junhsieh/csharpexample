@@ -84,8 +84,8 @@
                 <toolkit2:AutoCompleteBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=City}" Background="Yellow" Margin="10,0,0,0"/>
-                            <TextBlock Text="{Binding Path=DealerName}"/>
+                            <TextBlock Text="{Binding Path=City}" Background="Yellow"/>
+                            <TextBlock Text="{Binding Path=DealerName}" Background="Pink" Margin="10,0,0,0"/>
                         </StackPanel>
                     </DataTemplate>
                 </toolkit2:AutoCompleteBox.ItemTemplate>
