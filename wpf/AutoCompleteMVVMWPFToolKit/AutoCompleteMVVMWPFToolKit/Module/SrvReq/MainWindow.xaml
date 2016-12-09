@@ -89,7 +89,7 @@
                                       ItemsSource="{Binding Path=SrvReqCore.DealerSingle.OptArr}"
                                       SelectedItem="{Binding Path=SrvReqCore.Dealer, Mode=TwoWay}"
                                       ValueMemberPath="DealerName"
-                                      IsTextCompletionEnabled="False"
+                                      IsTextCompletionEnabled="True"
                                       FilterMode="Contains"
                                       ItemFilter="{Binding Path=SrvReqCore.DealerFilter}"
                                       Style="{StaticResource AutoCompleteBoxStyle}"
