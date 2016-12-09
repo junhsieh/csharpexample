@@ -6,11 +6,11 @@ namespace AutoCompleteMVVMWPFToolKit.ViewModel
 {
     class ObjectOpt<T>
     {
-        public ObservableCollection<T> OptArr { get; set; }
+        public RangeEnabledObservableCollection<T> OptArr { get; set; }
 
         public ObjectOpt()
         {
-            this.OptArr = new ObservableCollection<T>(); // TODO: need this line or not?
+            this.OptArr = new RangeEnabledObservableCollection<T>(); // TODO: need this line or not?
         }
     }
 

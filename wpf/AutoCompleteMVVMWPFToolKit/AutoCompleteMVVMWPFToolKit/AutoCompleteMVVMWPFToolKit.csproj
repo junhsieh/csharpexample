@@ -85,6 +85,7 @@
     <Compile Include="ViewModel\ObjectOpt.cs" />
     <Compile Include="ViewModel\ObjectOptUtil.cs" />
     <Compile Include="ViewModel\ObservableBase.cs" />
+    <Compile Include="ViewModel\RangeEnabledObservableCollection.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

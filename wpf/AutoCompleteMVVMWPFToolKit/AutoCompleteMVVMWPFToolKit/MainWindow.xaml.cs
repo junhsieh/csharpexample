@@ -1,5 +1,6 @@
 ﻿using AutoCompleteMVVMWPFToolKit.Module.SrvReq;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Windows;
@@ -78,15 +79,24 @@ namespace AutoCompleteMVVMWPFToolKit
             w.MainWindowViewModel.SrvReqCore.CountrySingle.OptArr.Add(new Country() { ID = 3, Text = "China" });
             w.MainWindowViewModel.SrvReqCore.CountrySingle.OptArr.Add(new Country() { ID = 4, Text = "Japan" });
 
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 1, DealerName = "aaa 1", City = "city 1" });
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 2, DealerName = "aaa 2", City = "city 2" });
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 3, DealerName = "aaa 3", City = "city 3" });
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 4, DealerName = "bbb 4", City = "city 4" });
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 5, DealerName = "bbb 5", City = "city 5" });
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 6, DealerName = "bbb 6", City = "city 6" });
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 7, DealerName = "ccc 7", City = "city 7" });
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 8, DealerName = "ccc 8", City = "city 8" });
-            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 9, DealerName = "ccc 9", City = "city 9" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 1, DealerName = "aaa 1", City = "city 1" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 2, DealerName = "aaa 2", City = "city 2" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 3, DealerName = "aaa 3", City = "city 3" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 4, DealerName = "bbb 4", City = "city 4" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 5, DealerName = "bbb 5", City = "city 5" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 6, DealerName = "bbb 6", City = "city 6" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 7, DealerName = "ccc 7", City = "city 7" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 8, DealerName = "ccc 8", City = "city 8" });
+            //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 9, DealerName = "ccc 9", City = "city 9" });
+
+            List<Dealer> DealerArr = new List<Dealer>();
+
+            for (int i = 1; i < 4999; i++)
+            {
+                DealerArr.Add(new Dealer() { ID = i, DealerName = "ddd " + i.ToString(), City = "city " + i.ToString() });
+                //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = i, DealerName = "ddd " + i.ToString(), City = "city " + i.ToString() });
+            }
+            w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.AddRange(DealerArr);
 
             w.ShowDialog();
         }
