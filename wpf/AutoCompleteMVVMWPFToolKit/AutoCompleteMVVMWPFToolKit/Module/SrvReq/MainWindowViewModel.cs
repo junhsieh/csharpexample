@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
@@ -21,6 +22,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             get { return ItemSingle.SelectedID; }
             set { ItemSingle.SelectedID = value; }
         }
+        [JsonIgnore]
         public ViewModel.ObjectOptSingle<Item> ItemSingle { get; set; }
 
         // Warranty
@@ -29,6 +31,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             get { return WarrantyMultiple.SelectedID; }
             set { WarrantyMultiple.SelectedID = value; }
         }
+        [JsonIgnore]
         public ViewModel.ObjectOptMultiple<Warranty> WarrantyMultiple { get; set; }
 
         // Country
@@ -41,6 +44,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
                 base.NotifyPropertyChanged("IDCountry"); // need this if it is a ComboBox.
             }
         }
+        [JsonIgnore]
         public ViewModel.ObjectOptSingle<Country> CountrySingle { get; set; }
 
         // Dealer
@@ -53,7 +57,9 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
                 base.NotifyPropertyChanged("Dealer"); // need this if it a AutocompleteBox.
             }
         }
+        [JsonIgnore]
         public ViewModel.ObjectOptSingle<Dealer> DealerSingle { get; set; }
+        [JsonIgnore]
         public Dealer Dealer
         {
             get { return DealerSingle.GetSelectedObj(); }
@@ -65,6 +71,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
                 }
             }
         }
+        [JsonIgnore]
         public AutoCompleteFilterPredicate<object> DealerFilter
         {
             get
@@ -97,6 +104,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             get { return UploadFileMultiple.SelectedID; }
             set { UploadFileMultiple.SelectedID = value; }
         }
+        [JsonIgnore]
         public ViewModel.ObjectOptMultiple<UploadFile> UploadFileMultiple { get; set; }
 
         public SrvReqCore()
