@@ -91,12 +91,21 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             }
         }
 
+        // UploadFile
+        public List<int> IDUploadFile
+        {
+            get { return UploadFileMultiple.SelectedID; }
+            set { UploadFileMultiple.SelectedID = value; }
+        }
+        public ViewModel.ObjectOptMultiple<UploadFile> UploadFileMultiple { get; set; }
+
         public SrvReqCore()
         {
             this.ItemSingle = new ViewModel.ObjectOptSingle<Item>();
             this.WarrantyMultiple = new ViewModel.ObjectOptMultiple<Warranty>();
             this.CountrySingle = new ViewModel.ObjectOptSingle<Country>();
             this.DealerSingle = new ViewModel.ObjectOptSingle<Dealer>();
+            this.UploadFileMultiple = new ViewModel.ObjectOptMultiple<UploadFile>();
         }
     }
 
@@ -120,5 +129,12 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
     {
         public string DealerName { get; set; }
         public string City { get; set; }
+    }
+
+    class UploadFile : ViewModel.ObjectOptBase
+    {
+        public string FileName { get; set; }
+        public long FileSize { get; set; }
+        public string FileMime { get; set; }
     }
 }

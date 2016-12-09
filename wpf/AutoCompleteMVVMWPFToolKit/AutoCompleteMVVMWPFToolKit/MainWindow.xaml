@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AutoCompleteMVVMWPFToolKit"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" ContentRendered="Window_ContentRendered">
     <Grid>
         <StackPanel Width="100" HorizontalAlignment="Left">
             <Button x:Name="SrvReqBtn" Content="Service Request" Click="SrvReqBtn_Click"/>

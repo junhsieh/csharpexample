@@ -1,4 +1,7 @@
 ﻿using AutoCompleteMVVMWPFToolKit.Module.SrvReq;
+using System;
+using System.Configuration;
+using System.Net;
 using System.Windows;
 
 namespace AutoCompleteMVVMWPFToolKit
@@ -8,9 +11,52 @@ namespace AutoCompleteMVVMWPFToolKit
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal Lib.HTTPData httpdata;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            SrvReqBtn.IsEnabled = false;
+
+            httpdata = new Lib.HTTPData()
+            {
+                Cookie = new CookieContainer(),
+                CSRFtoken = "",
+            };
+        }
+
+        private void Login()
+        {
+            Lib.iojson o = new Lib.iojson();
+            Lib.iojson i = new Lib.iojson();
+
+            LoginInfo li = new LoginInfo()
+            {
+                Username = ConfigurationManager.AppSettings["Username"],
+                Password = ConfigurationManager.AppSettings["Password"],
+            };
+            o.AddObjToArr(li);
+            i = Lib.Util.PostWebContent(ref this.httpdata, "/Login", o.Encode());
+
+            if (i.Status != true)
+            {
+                MessageBox.Show(String.Join("; ", i.ErrArr));
+            }
+            else
+            {
+                // Get the first CSRF token.
+                i = Lib.Util.GetWebContent(ref this.httpdata, "/CSRFToken");
+
+                if (i.Status != true)
+                {
+                    MessageBox.Show(String.Join("; ", i.ErrArr));
+                }
+                else
+                {
+                    SrvReqBtn.IsEnabled = true;
+                }
+            }
         }
 
         private void SrvReqBtn_Click(object sender, RoutedEventArgs e)
@@ -44,5 +90,16 @@ namespace AutoCompleteMVVMWPFToolKit
 
             w.ShowDialog();
         }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            Login();
+        }
+    }
+
+    class LoginInfo
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }
