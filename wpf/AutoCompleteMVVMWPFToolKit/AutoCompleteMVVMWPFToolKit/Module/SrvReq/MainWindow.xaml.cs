@@ -94,10 +94,10 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             {
                 this.MainWindowViewModel.SrvReqCore.UploadFileMultiple.OptArr.Add(new UploadFile()
                 {
-                    ID = 1,
+                    ID = file.ID,
                     FileName = file.FileName,
-                    FileSize = 999,
-                    FileMime = "image/png",
+                    FileSize = file.FileSize,
+                    FileMime = file.FileMime,
                     IsSelected = true,
                 });
             }
@@ -114,7 +114,12 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
             bitmap.EndInit();
 
-            cb.ToolTip = new Image() { Source = bitmap, Width = 600, Height = 400, Stretch = Stretch.Uniform };
+            StackPanel sp = new StackPanel();
+
+            sp.Children.Add(new Image() { Source = bitmap, Width = 600, Height = 400, Stretch = Stretch.Uniform });
+            sp.Children.Add(new TextBlock() { Text = "HI"});
+
+            cb.ToolTip = sp;
         }
     }
 }

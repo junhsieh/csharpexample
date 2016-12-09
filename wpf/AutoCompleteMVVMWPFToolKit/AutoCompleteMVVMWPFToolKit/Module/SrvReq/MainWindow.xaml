@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:toolkit2="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
         WindowStartupLocation="CenterOwner"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="800" Width="1200">
     <StackPanel>
         <StackPanel.DataContext>
             <local:MainWindowViewModel x:Name="MainWindowViewModel"/>
@@ -103,7 +103,11 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <CheckBox Content="{Binding Path=FileName}" IsChecked="{Binding Path=IsSelected}" Margin="0,6,10,0" ToolTip="" ToolTipOpening="CheckBox_ToolTipOpening"/>
+                            <StackPanel>
+                                <CheckBox Content="{Binding Path=FileName}" IsChecked="{Binding Path=IsSelected}" Margin="0,6,10,0" ToolTip="" ToolTipOpening="CheckBox_ToolTipOpening"/>
+                                <TextBlock Text="{Binding Path=FileSize}"/>
+                                <TextBlock Text="{Binding Path=FileMime}"/>
+                            </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
