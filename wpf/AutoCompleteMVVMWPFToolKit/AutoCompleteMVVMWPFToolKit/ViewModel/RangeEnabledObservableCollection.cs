@@ -25,11 +25,11 @@ namespace AutoCompleteMVVMWPFToolKit.ViewModel
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
-        public void Reset(IEnumerable<T> items)
+        public void AddRangeBegin(IEnumerable<T> items)
         {
             this.Items.Clear();
 
-            AddRange(items);
+            this.AddRange(items);
         }
     }
 }
