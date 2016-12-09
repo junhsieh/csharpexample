@@ -9,6 +9,17 @@
         WindowStartupLocation="CenterOwner"
         Title="MainWindow" Height="800" Width="1200">
     <StackPanel>
+        <StackPanel.Resources>
+            <Style x:Key="AutoCompleteBoxStyle" TargetType="{x:Type toolkit2:AutoCompleteBox}">
+                <Style.Resources>
+                    <Style TargetType="{x:Type ListBox}">
+                        <Setter Property="MinWidth" Value="100"/>
+                        <Setter Property="MaxWidth" Value="800"/>
+                        <Setter Property="MaxHeight" Value="300"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+        </StackPanel.Resources>
         <StackPanel.DataContext>
             <local:MainWindowViewModel x:Name="MainWindowViewModel"/>
         </StackPanel.DataContext>
@@ -81,6 +92,7 @@
                                       IsTextCompletionEnabled="False"
                                       FilterMode="Contains"
                                       ItemFilter="{Binding Path=SrvReqCore.DealerFilter}"
+                                      Style="{StaticResource AutoCompleteBoxStyle}"
                                       >
                 <toolkit2:AutoCompleteBox.ItemTemplate>
                     <DataTemplate>

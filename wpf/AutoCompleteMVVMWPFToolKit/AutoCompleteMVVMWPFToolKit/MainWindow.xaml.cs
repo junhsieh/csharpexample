@@ -90,11 +90,28 @@ namespace AutoCompleteMVVMWPFToolKit
             //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 9, DealerName = "ccc 9", City = "city 9" });
 
             List<Dealer> DealerArr = new List<Dealer>();
+            //Dealer[] DealerArr = new Dealer[5000];
 
-            for (int i = 1; i < 4999; i++)
+            for (int i = 0; i < 10000; i++)
             {
-                DealerArr.Add(new Dealer() { ID = i, DealerName = "ddd " + i.ToString(), City = "city " + i.ToString() });
-                //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = i, DealerName = "ddd " + i.ToString(), City = "city " + i.ToString() });
+                var _DealerNameBase = "aaa ";
+
+                if (i > 30)
+                {
+                    _DealerNameBase = "ddd ";
+                }
+                else if (i > 20)
+                {
+                    _DealerNameBase = "ccc ";
+                }
+                else if (i > 10)
+                {
+                    _DealerNameBase = "bbb ";
+                }
+
+                //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = i, DealerName = _DealerNameBase + i.ToString(), City = "city " + i.ToString() });
+                DealerArr.Add(new Dealer() { ID = i, DealerName = _DealerNameBase + i.ToString(), City = "city " + i.ToString() });
+                //DealerArr[i] = new Dealer() { ID = i, DealerName = "ddd " + i.ToString(), City = "city " + i.ToString() };
             }
             w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.AddRange(DealerArr);
 
