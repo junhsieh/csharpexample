@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Net;
 using System.Windows;
 
@@ -64,6 +65,14 @@ namespace AutoCompleteMVVMWPFToolKit
         {
             Module.SrvReq.MainWindow w = new Module.SrvReq.MainWindow();
             w.Owner = Window.GetWindow(this);
+
+            //Lib.iojson o = new Lib.iojson();
+            //var jsonStr = "{{\"SelectedID\":0,\"OptArr\":[{\"ItemNum\":\"CXR51A\",\"ItemName\":\"Computer Regular Black\",\"ID\":1,\"IsSelected\":false,\"HasErrors\":false},{\"ItemNum\":\"CXR52A\",\"ItemName\":\"Computer Regular Red\",\"ID\":2,\"IsSelected\":false,\"HasErrors\":false},{\"ItemNum\":\"CXR53A\",\"ItemName\":\"Computer Regular Green\",\"ID\":3,\"IsSelected\":false,\"HasErrors\":false}]}}";
+            //var jsonStr = "{\"Status\":true,\"ErrArr\":[],\"ObjArr\":[{\"SrvReqCore\":{\"IDItem\":0,\"ItemSingle\":{\"SelectedID\":0,\"OptArr\":[{\"ItemNum\":\"CXR51A\",\"ItemName\":\"Computer Regular Black2\",\"ID\":1,\"IsSelected\":false,\"HasErrors\":false},{\"ItemNum\":\"CXR52A\",\"ItemName\":\"Computer Regular Red\",\"ID\":2,\"IsSelected\":false,\"HasErrors\":false},{\"ItemNum\":\"CXR53A\",\"ItemName\":\"Computer Regular Green\",\"ID\":3,\"IsSelected\":false,\"HasErrors\":false}]},\"IDWarranty\":[],\"IDCountry\":0,\"IDDealer\":0,\"IDUploadFile\":[],\"HasErrors\":false}}],\"ObjMap\":{}}";
+            //o.Decode(jsonStr);
+
+            //Debug.WriteLine("HERE: " + o.Encode());
+            //o.GetObjFromArr(0, w.MainWindowViewModel);
 
             w.MainWindowViewModel.SrvReqCore.ItemSingle.OptArr.Add(new Item() { ID = 1, ItemNum = "CXR51A", ItemName = "Computer Regular Black" });
             w.MainWindowViewModel.SrvReqCore.ItemSingle.OptArr.Add(new Item() { ID = 2, ItemNum = "CXR52A", ItemName = "Computer Regular Red" });
