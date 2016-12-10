@@ -121,5 +121,11 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
 
             cb.ToolTip = sp;
         }
+
+        private void IDDealerBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Dealer item = (Dealer)((AutoCompleteBox)sender).SelectedItem;
+            DealerNameTest.Text = "DealerName: " + item.DealerName + "; City: " + item.City;
+        }
     }
 }
