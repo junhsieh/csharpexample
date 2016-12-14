@@ -17,11 +17,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
     class SrvReqCore : ViewModel.ObservableBase
     {
         // Item
-        public int IDItem
-        {
-            get { return ItemSingle.SelectedID; }
-            set { ItemSingle.SelectedID = value; }
-        }
+        public int IDItem { get { return ItemSingle.SelectedID; } set { ItemSingle.SelectedID = value; } }
         [JsonIgnore]
         public ViewModel.ObjectOptSingle<Item> ItemSingle { get; set; }
 
