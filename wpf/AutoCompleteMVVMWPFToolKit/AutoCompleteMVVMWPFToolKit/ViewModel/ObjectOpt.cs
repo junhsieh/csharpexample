@@ -10,7 +10,7 @@ namespace AutoCompleteMVVMWPFToolKit.ViewModel
 
         public ObjectOpt()
         {
-            this.OptArr = new RangeEnabledObservableCollection<T>(); // TODO: need this line or not?
+            this.OptArr = new RangeEnabledObservableCollection<T>();
         }
     }
 
