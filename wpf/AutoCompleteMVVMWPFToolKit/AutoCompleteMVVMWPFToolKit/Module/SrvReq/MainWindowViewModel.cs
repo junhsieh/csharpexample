@@ -78,11 +78,11 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
 
                     if (obj != null)
                     {
-                        if (item.DealerName.ToLower().Contains(searchText))
+                        if (item.DealerName.ToLower().Contains(searchText.ToLower()))
                         {
                             return true;
                         }
-                        else if (item.City.ToLower().Contains(searchText))
+                        else if (item.City.ToLower().Contains(searchText.ToLower()))
                         {
                             return true;
                         }
