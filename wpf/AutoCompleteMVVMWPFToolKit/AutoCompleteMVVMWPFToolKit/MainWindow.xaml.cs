@@ -98,6 +98,7 @@ namespace AutoCompleteMVVMWPFToolKit
             //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 8, DealerName = "ccc 8", City = "city 8" });
             //w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.Add(new Dealer() { ID = 9, DealerName = "ccc 9", City = "city 9" });
 
+            //
             List<Dealer> DealerArr = new List<Dealer>();
             //Dealer[] DealerArr = new Dealer[5000];
 
@@ -123,6 +124,30 @@ namespace AutoCompleteMVVMWPFToolKit
                 //DealerArr[i] = new Dealer() { ID = i, DealerName = "ddd " + i.ToString(), City = "city " + i.ToString() };
             }
             w.MainWindowViewModel.SrvReqCore.DealerSingle.OptArr.AddRange(DealerArr);
+
+            //
+            List<Person> PersonArr = new List<Person>();
+
+            for (int i = 0; i < 10000; i++)
+            {
+                var _PersonNameBase = "aaa ";
+
+                if (i > 30)
+                {
+                    _PersonNameBase = "ddd ";
+                }
+                else if (i > 20)
+                {
+                    _PersonNameBase = "ccc ";
+                }
+                else if (i > 10)
+                {
+                    _PersonNameBase = "bbb ";
+                }
+
+                PersonArr.Add(new Person() { ID = i, PersonName = _PersonNameBase + i.ToString(), City = "city " + i.ToString() });
+            }
+            w.MainWindowViewModel.SrvReqCore.PersonSingle.OptArr.AddRange(PersonArr);
 
             w.ShowDialog();
         }

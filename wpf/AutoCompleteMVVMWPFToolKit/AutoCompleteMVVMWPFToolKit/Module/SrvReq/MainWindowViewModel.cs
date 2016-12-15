@@ -94,6 +94,57 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             }
         }
 
+        // Person
+        public int IDPerson
+        {
+            get { return PersonSingle.SelectedID; }
+            set
+            {
+                PersonSingle.SelectedID = value;
+                base.NotifyPropertyChanged("Person"); // need this if it a AutocompleteBox.
+            }
+        }
+        [JsonIgnore]
+        public ViewModel.ObjectOptSingle<Person> PersonSingle { get; set; }
+        [JsonIgnore]
+        public Person Person
+        {
+            get { return PersonSingle.GetSelectedObj(); }
+            set
+            {
+                if (value != null)
+                {
+                    this.IDPerson = value.ID;
+                }
+            }
+        }
+        [JsonIgnore]
+        public AutoCompleteFilterPredicate<object> PersonFilter
+        {
+            get
+            {
+                AutoCompleteFilterPredicate<object> result = (searchText, obj) =>
+                {
+                    var item = (Person)obj;
+
+                    if (obj != null)
+                    {
+                        if (item.PersonName.ToLower().Contains(searchText.ToLower()))
+                        {
+                            return true;
+                        }
+                        else if (item.City.ToLower().Contains(searchText.ToLower()))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+
+                return result;
+            }
+        }
+
         // UploadFile
         public List<int> IDUploadFile
         {
@@ -109,6 +160,7 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
             this.WarrantyMultiple = new ViewModel.ObjectOptMultiple<Warranty>();
             this.CountrySingle = new ViewModel.ObjectOptSingle<Country>();
             this.DealerSingle = new ViewModel.ObjectOptSingle<Dealer>();
+            this.PersonSingle = new ViewModel.ObjectOptSingle<Person>();
             this.UploadFileMultiple = new ViewModel.ObjectOptMultiple<UploadFile>();
         }
     }
@@ -132,6 +184,12 @@ namespace AutoCompleteMVVMWPFToolKit.Module.SrvReq
     class Dealer : ViewModel.ObjectOptBase
     {
         public string DealerName { get; set; }
+        public string City { get; set; }
+    }
+
+    class Person : ViewModel.ObjectOptBase
+    {
+        public string PersonName { get; set; }
         public string City { get; set; }
     }
 

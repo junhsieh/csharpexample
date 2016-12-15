@@ -39,6 +39,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Item"/>
@@ -106,9 +107,32 @@
                 </toolkit2:AutoCompleteBox>
                 <TextBlock x:Name="DealerNameTest"/>
             </StackPanel>
-            <Button Grid.Row="7" Grid.Column="1" x:Name="SetDealerBtn" Content="Set Dealer" Width="100" HorizontalAlignment="Left" Click="SetDealerBtn_Click"/>
-            <Label Grid.Row="8" Grid.Column="0" Content="Upload:"/>
-            <StackPanel Grid.Row="8" Grid.Column="1">
+            <Label Grid.Row="7" Grid.Column="0" Content="Person:"/>
+            <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
+                <toolkit2:AutoCompleteBox Width="400"
+                                      HorizontalAlignment="Left"
+                                      x:Name="IDPersonBox"
+                                      ItemsSource="{Binding Path=SrvReqCore.PersonSingle.OptArr}"
+                                      SelectedItem="{Binding Path=SrvReqCore.Person, Mode=TwoWay}"
+                                      ValueMemberPath="PersonName"
+                                      IsTextCompletionEnabled="True"
+                                      FilterMode="Contains"
+                                      ItemFilter="{Binding Path=SrvReqCore.PersonFilter}"
+                                      Style="{StaticResource AutoCompleteBoxStyle}"
+                                      >
+                    <toolkit2:AutoCompleteBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=City}" Background="Yellow"/>
+                                <TextBlock Text="{Binding Path=PersonName}" Background="Pink" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </toolkit2:AutoCompleteBox.ItemTemplate>
+                </toolkit2:AutoCompleteBox>
+            </StackPanel>
+            <Button Grid.Row="8" Grid.Column="1" x:Name="SetDealerBtn" Content="Set Dealer" Width="100" HorizontalAlignment="Left" Click="SetDealerBtn_Click"/>
+            <Label Grid.Row="9" Grid.Column="0" Content="Upload:"/>
+            <StackPanel Grid.Row="9" Grid.Column="1">
                 <Button Content="Browse" x:Name="UploadFileBtn" Width="100" HorizontalAlignment="Left" Click="UploadFileBtn_Click"/>
                 <ItemsControl ItemsSource="{Binding Path=SrvReqCore.UploadFileMultiple.OptArr}">
                     <ItemsControl.ItemsPanel>
@@ -127,8 +151,8 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            <Label Grid.Row="9" Grid.Column="0" Content="Show:"/>
-            <StackPanel Grid.Row="9" Grid.Column="1">
+            <Label Grid.Row="10" Grid.Column="0" Content="Show:"/>
+            <StackPanel Grid.Row="10" Grid.Column="1">
                 <Button x:Name="ShowValueBtn" Content="Show Value" Width="100" HorizontalAlignment="Left" Click="ShowValueBtn_Click"/>
                 <TextBox x:Name="DebugBox" Width="600" Height="300" HorizontalAlignment="Left" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             </StackPanel>
