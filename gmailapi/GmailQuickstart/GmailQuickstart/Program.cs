@@ -19,16 +19,15 @@ namespace GmailQuickstart
         // at ~/.credentials/gmail-dotnet-quickstart.json
         static string[] Scopes = { GmailService.Scope.MailGoogleCom };
         static string ApplicationName = "Gmail API .NET Quickstart";
+        static string UserId = "me";
 
         static void Main(string[] args)
         {
             UserCredential credential;
 
-            using (var stream =
-                new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
             {
-                string credPath = System.Environment.GetFolderPath(
-                    System.Environment.SpecialFolder.Personal);
+                string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 credPath = Path.Combine(credPath, ".credentials/gmail-dotnet-quickstart.json");
 
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
@@ -47,8 +46,15 @@ namespace GmailQuickstart
                 ApplicationName = ApplicationName,
             });
 
+            ListLabel(service);
+
+            Console.Read();
+        }
+
+        static void ListLabel(GmailService service)
+        {
             // Define parameters of request.
-            UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List("me");
+            UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List(UserId);
 
             // List labels.
             IList<Label> labels = request.Execute().Labels;
@@ -64,7 +70,6 @@ namespace GmailQuickstart
             {
                 Console.WriteLine("No labels found.");
             }
-            Console.Read();
         }
     }
 }
