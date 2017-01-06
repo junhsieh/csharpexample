@@ -46,30 +46,102 @@ namespace GmailQuickstart
                 ApplicationName = ApplicationName,
             });
 
-            ListLabel(service);
+            ListLabels(service, UserId);
+            //FetchMessageMain(service);
 
             Console.Read();
         }
 
-        static void ListLabel(GmailService service)
+        /// <summary>
+        /// List the labels in the user's mailbox.
+        /// </summary>
+        /// <param name="service">Gmail API service instance.</param>
+        /// <param name="userId">User's email address. The special value "me"
+        /// can be used to indicate the authenticated user.</param>
+        public static void ListLabels(GmailService service, String userId)
         {
-            // Define parameters of request.
-            UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List(UserId);
-
-            // List labels.
-            IList<Label> labels = request.Execute().Labels;
-            Console.WriteLine("Labels:");
-            if (labels != null && labels.Count > 0)
+            try
             {
-                foreach (var labelItem in labels)
+                ListLabelsResponse response = service.Users.Labels.List(userId).Execute();
+                foreach (Label label in response.Labels)
                 {
-                    Console.WriteLine("{0}", labelItem.Name);
+                    Console.WriteLine(label.Id + " - " + label.Name);
                 }
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("No labels found.");
+                Console.WriteLine("An error occurred: " + e.Message);
             }
+        }
+
+        static void FetchMessageMain(GmailService service)
+        {
+            List<Message> msgArr = ListMessages(service, UserId, "in:(INBOX OR SENT)");
+
+            foreach (var msg in msgArr)
+            {
+                Console.WriteLine("{0}", msg.Id);
+
+                Message msgObj = GetMessage(service, UserId, msg.Id);
+
+                IList<MessagePartHeader> headerArr = msgObj.Payload.Headers;
+
+                foreach (var item in headerArr)
+                {
+                    Console.WriteLine("{0} => {1}", item.Name, item.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// List all Messages of the user's mailbox matching the query.
+        /// </summary>
+        /// <param name="service">Gmail API service instance.</param>
+        /// <param name="userId">User's email address. The special value "me"
+        /// can be used to indicate the authenticated user.</param>
+        /// <param name="query">String used to filter Messages returned.</param>
+        public static List<Message> ListMessages(GmailService service, String userId, String query)
+        {
+            List<Message> result = new List<Message>();
+            UsersResource.MessagesResource.ListRequest request = service.Users.Messages.List(userId);
+            request.Q = query;
+
+            do
+            {
+                try
+                {
+                    ListMessagesResponse response = request.Execute();
+                    result.AddRange(response.Messages);
+                    request.PageToken = response.NextPageToken;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("An error occurred: " + e.Message);
+                }
+            } while (!String.IsNullOrEmpty(request.PageToken));
+
+            return result;
+        }
+
+        /// <summary>
+        /// Retrieve a Message by ID.
+        /// </summary>
+        /// <param name="service">Gmail API service instance.</param>
+        /// <param name="userId">User's email address. The special value "me"
+        /// can be used to indicate the authenticated user.</param>
+        /// <param name="messageId">ID of Message to retrieve.</param>
+        public static Message GetMessage(GmailService service, String userId, String messageId)
+        {
+            try
+            {
+                return service.Users.Messages.Get(userId, messageId).Execute();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: " + e.Message);
+            }
+
+            return null;
         }
     }
 }
