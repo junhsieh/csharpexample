@@ -6,10 +6,7 @@ using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace GmailQuickstart
 {
@@ -84,6 +81,14 @@ namespace GmailQuickstart
                 Console.WriteLine("MESSAGE-ID: {0}", headerMap["MESSAGE-ID"]);
                 Console.WriteLine("IN-REPLY-TO: {0}", headerMap["IN-REPLY-TO"]);
                 Console.WriteLine("REFERENCES: {0}", headerMap["REFERENCES"]);
+                Console.WriteLine("LABELS: {0}", String.Join(", ", msgObj.LabelIds));
+
+                List<string> bodyArr = GetMessageBody(msgObj.Payload);
+
+                foreach (var item in bodyArr)
+                {
+                    Console.WriteLine("BODY: {0}", item);
+                }
                 break;
             }
         }
@@ -172,6 +177,28 @@ namespace GmailQuickstart
             }
 
             return null;
+        }
+
+        public List<string> GetMessageBody(MessagePart partObj)
+        {
+            List<string> bodyArr = new List<string>();
+
+            Console.WriteLine("MimeType: {0}", partObj.MimeType);
+
+            if (partObj.Body.Size > 0)
+            {
+                bodyArr.Add(System.Text.Encoding.UTF8.GetString(Lib.base64urldecode(partObj.Body.Data)));
+            } else
+            {
+                IList<MessagePart> partArr = partObj.Parts;
+
+                foreach (IList<MessagePart> _part in partArr)
+                {
+
+                }
+            }
+
+            return bodyArr;
         }
     }
 }
