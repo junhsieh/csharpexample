@@ -73,14 +73,31 @@ namespace GmailQuickstart
                 Console.WriteLine("{0}", msg.Id);
 
                 Message msgObj = this.GetMessage(msg.Id);
-
                 IList<MessagePartHeader> headerArr = msgObj.Payload.Headers;
+                Dictionary<string, string> headerMap = ConvHeaderDict(headerArr);
 
-                //foreach (var item in headerArr)
+                //foreach (var item in headerMap)
                 //{
-                //    Console.WriteLine("{0} => {1}", item.Name, item.Value);
+                //    Console.WriteLine("{0}", item.Key);
                 //}
+
+                Console.WriteLine("MESSAGE-ID: {0}", headerMap["MESSAGE-ID"]);
+                Console.WriteLine("IN-REPLY-TO: {0}", headerMap["IN-REPLY-TO"]);
+                Console.WriteLine("REFERENCES: {0}", headerMap["REFERENCES"]);
+                break;
             }
+        }
+
+        public Dictionary<string, string> ConvHeaderDict(IList<MessagePartHeader> itemArr)
+        {
+            Dictionary<string, string> itemMap = new Dictionary<string, string>();
+
+            foreach (var item in itemArr)
+            {
+                itemMap[item.Name.ToUpper()] = item.Value;
+            }
+
+            return itemMap;
         }
 
         /// <summary>
