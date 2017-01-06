@@ -65,29 +65,28 @@ namespace GmailQuickstart
             string query = "in:(INBOX)"; // in:(INBOX OR SENT)
             List<Message> msgArr = this.ListMessages(query);
 
-            foreach (var msg in msgArr)
+            foreach (var _msg in msgArr)
             {
-                Console.WriteLine("{0}", msg.Id);
+                Console.WriteLine("{0}", _msg.Id);
 
-                Message msgObj = this.GetMessage(msg.Id);
+                Message msgObj = this.GetMessage(_msg.Id);
                 IList<MessagePartHeader> headerArr = msgObj.Payload.Headers;
                 Dictionary<string, string> headerMap = ConvHeaderDict(headerArr);
-
-                //foreach (var item in headerMap)
-                //{
-                //    Console.WriteLine("{0}", item.Key);
-                //}
 
                 Console.WriteLine("MESSAGE-ID: {0}", headerMap["MESSAGE-ID"]);
                 Console.WriteLine("IN-REPLY-TO: {0}", headerMap["IN-REPLY-TO"]);
                 Console.WriteLine("REFERENCES: {0}", headerMap["REFERENCES"]);
+                Console.WriteLine("CONTENT-TYPE: {0}", headerMap["CONTENT-TYPE"]);
+                Console.WriteLine("FROM: {0}", headerMap["FROM"]);
+                Console.WriteLine("TO: {0}", headerMap["TO"]);
+                Console.WriteLine("SUBJECT: {0}", headerMap["SUBJECT"]);
                 Console.WriteLine("LABELS: {0}", String.Join(", ", msgObj.LabelIds));
-
+                
                 List<string> bodyArr = GetMessageBody(msgObj.Payload);
 
-                foreach (var item in bodyArr)
+                foreach (var _item in bodyArr)
                 {
-                    Console.WriteLine("BODY: {0}", item);
+                    Console.WriteLine("BODY: {0}", _item);
                 }
                 break;
             }
@@ -97,9 +96,9 @@ namespace GmailQuickstart
         {
             Dictionary<string, string> itemMap = new Dictionary<string, string>();
 
-            foreach (var item in itemArr)
+            foreach (var _item in itemArr)
             {
-                itemMap[item.Name.ToUpper()] = item.Value;
+                itemMap[_item.Name.ToUpper()] = _item.Value;
             }
 
             return itemMap;
@@ -117,9 +116,9 @@ namespace GmailQuickstart
             {
                 ListLabelsResponse response = this.Service.Users.Labels.List(this.UserId).Execute();
 
-                foreach (Label label in response.Labels)
+                foreach (Label _label in response.Labels)
                 {
-                    Console.WriteLine(label.Id + " - " + label.Name);
+                    Console.WriteLine(_label.Id + " - " + _label.Name);
                 }
             }
             catch (Exception e)
@@ -188,13 +187,24 @@ namespace GmailQuickstart
             if (partObj.Body.Size > 0)
             {
                 bodyArr.Add(System.Text.Encoding.UTF8.GetString(Lib.base64urldecode(partObj.Body.Data)));
-            } else
+            }
+            else
             {
                 IList<MessagePart> partArr = partObj.Parts;
 
-                foreach (IList<MessagePart> _part in partArr)
+                foreach (MessagePart _part in partArr)
                 {
-
+                    if (_part.Body.Size > 0)
+                    {
+                        bodyArr.Add(System.Text.Encoding.UTF8.GetString(Lib.base64urldecode(_part.Body.AttachmentId)));
+                    }
+                    else
+                    {
+                        foreach (var _part2 in _part.Parts)
+                        {
+                            bodyArr.Add(System.Text.Encoding.Default.GetString(Lib.base64urldecode(_part2.Body.Data)));
+                        }
+                    }
                 }
             }
 
