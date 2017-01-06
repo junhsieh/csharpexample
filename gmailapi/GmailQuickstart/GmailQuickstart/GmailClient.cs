@@ -19,7 +19,7 @@ namespace GmailQuickstart
         // at ~/.credentials/gmail-dotnet-quickstart.json
         UserCredential Credential;
         GmailService Service;
-        bool IsValidCredential;
+        public bool IsValidCredential;
 
         string[] Scopes = { GmailService.Scope.MailGoogleCom };
         string ApplicationName = "Gmail API .NET Quickstart";
@@ -52,7 +52,7 @@ namespace GmailQuickstart
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
 
-                Console.WriteLine("Credential file saved to: " + credPath);
+                //Console.WriteLine("Credential file saved to: " + credPath);
             }
 
             if (this.Credential != null)
@@ -63,22 +63,23 @@ namespace GmailQuickstart
             return this.IsValidCredential;
         }
 
-        public void FetchMessageMain(GmailService service)
+        public void ProcessMessageMain()
         {
-            List<Message> msgArr = ListMessages(service, UserId, "in:(INBOX OR SENT)");
+            string query = "in:(INBOX)"; // in:(INBOX OR SENT)
+            List<Message> msgArr = this.ListMessages(query);
 
             foreach (var msg in msgArr)
             {
                 Console.WriteLine("{0}", msg.Id);
 
-                Message msgObj = GetMessage(service, UserId, msg.Id);
+                Message msgObj = this.GetMessage(msg.Id);
 
                 IList<MessagePartHeader> headerArr = msgObj.Payload.Headers;
 
-                foreach (var item in headerArr)
-                {
-                    Console.WriteLine("{0} => {1}", item.Name, item.Value);
-                }
+                //foreach (var item in headerArr)
+                //{
+                //    Console.WriteLine("{0} => {1}", item.Name, item.Value);
+                //}
             }
         }
 
@@ -112,10 +113,10 @@ namespace GmailQuickstart
         /// <param name="userId">User's email address. The special value "me"
         /// can be used to indicate the authenticated user.</param>
         /// <param name="query">String used to filter Messages returned.</param>
-        public List<Message> ListMessages(GmailService service, String userId, String query)
+        public List<Message> ListMessages(String query)
         {
             List<Message> result = new List<Message>();
-            UsersResource.MessagesResource.ListRequest request = service.Users.Messages.List(userId);
+            UsersResource.MessagesResource.ListRequest request = this.Service.Users.Messages.List(this.UserId);
             request.Q = query;
 
             do
@@ -142,11 +143,11 @@ namespace GmailQuickstart
         /// <param name="userId">User's email address. The special value "me"
         /// can be used to indicate the authenticated user.</param>
         /// <param name="messageId">ID of Message to retrieve.</param>
-        public Message GetMessage(GmailService service, String userId, String messageId)
+        public Message GetMessage(String messageId)
         {
             try
             {
-                return service.Users.Messages.Get(userId, messageId).Execute();
+                return this.Service.Users.Messages.Get(this.UserId, messageId).Execute();
             }
             catch (Exception e)
             {

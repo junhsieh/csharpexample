@@ -12,11 +12,13 @@ namespace GmailQuickstart
     {
         static void Main(string[] args)
         {
-            //ListLabels(service, UserId);
-            //FetchMessageMain(service);
-
             GmailClient cli = new GmailClient();
-            cli.ListLabels();
+
+            if (cli.IsValidCredential == true)
+            {
+                //cli.ListLabels();
+                cli.ProcessMessageMain();
+            }
 
             Console.Read();
         }
