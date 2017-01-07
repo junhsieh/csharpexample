@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 
 namespace GmailQuickstart
 {
@@ -81,7 +82,7 @@ namespace GmailQuickstart
                 Console.WriteLine("TO: {0}", headerMap["TO"]);
                 Console.WriteLine("SUBJECT: {0}", headerMap["SUBJECT"]);
                 Console.WriteLine("LABELS: {0}", String.Join(", ", msgObj.LabelIds));
-                
+
                 List<string> bodyArr = GetMessageBody(msgObj.Payload);
 
                 foreach (var _item in bodyArr)
@@ -196,13 +197,19 @@ namespace GmailQuickstart
                 {
                     if (_part.Body.Size > 0)
                     {
-                        bodyArr.Add(System.Text.Encoding.UTF8.GetString(Lib.base64urldecode(_part.Body.AttachmentId)));
+                        Debug.WriteLine("======== 1 =======");
+
+                        bodyArr.Add(_part.Body.AttachmentId);
                     }
                     else
                     {
                         foreach (var _part2 in _part.Parts)
                         {
-                            bodyArr.Add(System.Text.Encoding.Default.GetString(Lib.base64urldecode(_part2.Body.Data)));
+                            Debug.WriteLine("======= 2 ========");
+                            Debug.WriteLine(_part2.Body.Data);
+                            Debug.WriteLine(System.Text.Encoding.UTF8.GetString(Lib.base64urldecode(_part2.Body.Data)));
+
+                            bodyArr.Add(System.Text.Encoding.UTF8.GetString(Lib.base64urldecode(_part2.Body.Data)));
                         }
                     }
                 }
